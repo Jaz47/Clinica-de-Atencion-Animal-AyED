@@ -3,5 +3,6 @@
 
 
 main(){
-	
+
+	system("PAUSE");
 }
