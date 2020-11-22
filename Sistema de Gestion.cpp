@@ -3,6 +3,8 @@
 #include <string.h>
 #include "calculos.h"
 
+typedef char cadena[100];
+
 struct fecha{
 	int dia, mes, anio;	
 };
@@ -10,42 +12,67 @@ struct fecha{
 
 
 struct Usuarios{
-	char usuario[10];
-	char contras[10];
-	char ape_y_nomb[60];
+	cadena usuario[10];
+	cadena contras[10];   
+	cadena ape_y_nomb[60];
 };
 
 struct Veterinario{
-    char ApellidoyNombre[60];
+    cadena ApellidoyNombre[60];
     int Matricula; 
     int DNI;
-    char Telefono[25];
+    cadena Telefono[25];
 };
 
 struct Mascota{
-	char Apellido_y_Nombre[60];
-    char Domicilio [60];
+	cadena Apellido_y_Nombre[60];
+    cadena Domicilio [60];
     int DNI_Duenio ;
-    char Localidad[60];
-    fecha Fecha_de_Nacimiento;
+    cadena Localidad[60];
+    fecha Fecha_de_Nac;
     float Peso; 
-    char Telefono[25];
+    cadena Telefono[25];
 };
 
 struct Turnos{
 	int Matricula_de_Veterinario;
     fecha Fecha ;
     int DNI_Duenio; 
-    char Detalle_de_Atencion[380];
+    cadena Detalle_de_Atencion[380];
 };
 
+int Opc;
+
 main(){
-	int opcion;
+	
+
 	do{
 		menuPrincipal();
-		printf("Seleccione la Opcion: ");
-		scanf("%d", &opcion);
+		printf("\nIngresar Opcion: ");
+        scanf("%d", &Opc);
+        system("cls");
+		switch(Opc){
+			case 1: Menu_Consultorio();
+			       do{
+			       	
+				   }while(Opc!=4);
+				   	  
+				break;
+			
+			case 2: Modul_Asist();
+			      do{
+			       	
+				   }while(Opc!=5);
+			    break;
+			
+			case 3: Modul_Admin();
+			      do{
+			       	
+				   }while(Opc!=5);
+			    break;
+		}
 		
+		system("PAUSE");
 	
-	}while (opcion != 4);
+	}while (Opc != 4);
 }
