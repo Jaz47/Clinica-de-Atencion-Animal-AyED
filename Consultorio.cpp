@@ -51,7 +51,7 @@ main(){
 	
 	do{
 		printf("\t------------------------------------------------------\n");
-         printf("\t|      **Modulo Consultorio Veterinario**            |\n");
+         printf("\t|      **Modulo de Consultorio Veterinario**            |\n");
          printf("\t| 1-> Iniciar Sesion                                 |\n");
          printf("\t| 2-> Visualizar Lista de Espera de Turnos (Informes)|\n");
          printf("\t| 3-> Registrar Evolucion de la Mascota              |\n");
@@ -67,7 +67,7 @@ main(){
    	case 2:
    	    t=fopen("Turnos.dat","rb");
    	    if(t==NULL){
-   	    	printf("NO SE REGISTRAN TURNOS\n");
+   	    	printf("LO SENTIMOS NO SE REGISTRAN TURNOS\n");
    	    	system("pause");
    	    	break;
 		   }
