@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef char cadena[100];
 
 struct fecha{
 	int dia, mes, anio;	
@@ -11,28 +10,29 @@ struct fecha{
 
 
 struct Usuarios{
-	cadena usuario[10];
-	cadena contras[10];   
-	cadena ape_y_nomb[60];
+	char usuario[10];
+	char contras[10];   
+	char ape_y_nomb[60];
 };
 
 struct Veterinario{
-    cadena ApellidoyNombre[60];
+    char ApellidoyNombre[60];
     int Matricula; 
     int DNI;
-    cadena Telefono[25];
+    char Telefono[25];
 };
 
 struct Mascota{
-	cadena Apellido_y_Nombre[60];
-    cadena Domicilio [60];
+	char Apellido_y_Nombre[60];
+    char Domicilio [60];
     int DNI_Duenio ;
-    cadena Localidad[60];
+    char Localidad[60];
     fecha Fecha_de_Nac;
     float Peso; 
-    cadena Telefono[25];
+    char Telefono[25];
 };
 
+typedef char cadena [380];
 struct Turnos{
 	int Matricula_de_Veterinario;
     fecha Fecha ;
