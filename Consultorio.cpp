@@ -1,52 +1,15 @@
 #include<stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "calculos.h"
 
 
-struct fecha{
-	int dia, mes, anio;	
-};
-
-
-
-struct Usuarios{
-	char usuario[10];
-	char contras[10];   
-	char ape_y_nomb[60];
-};
-
-struct Veterinario{
-    char ApellidoyNombre[60];
-    int Matricula; 
-    int DNI;
-    char Telefono[25];
-};
-
-struct Mascota{
-	char Apellido_y_Nombre[60];
-    char Domicilio [60];
-    int DNI_Duenio ;
-    char Localidad[60];
-    fecha Fecha_de_Nac;
-    float Peso; 
-    char Telefono[25];
-};
-
-typedef char cadena [380];
-struct Turnos{
-	int Matricula_de_Veterinario;
-    fecha Fecha ;
-    int DNI_Duenio; 
-    cadena Detalle_de_Atencion[380];
-};
-
-
-void list_turnos(FILE *t);
-void Evoluc_masc(FILE *m);
+void list_turnos();
+void Evoluc_masc();
 
 main(){
-	FILE *p,*m,*t;
-	p=fopen("Veterinarios.dat", "a+b");
+	FILE *Arch_Veter;
+	Arch_Veter=fopen("Veterinarios.dat", "a+b");
 	int Opc;
 	
 	do{
@@ -75,19 +38,19 @@ main(){
 		   fclose(t);
 		   break;
    	case 3:
-   	    e=fopen("Mascotas.dat","a+b");
-   	    Evoluc_masc(m);
-   	    fclose(m);
+   	    Arch_Veter=fopen("Mascotas.dat","a+b");
+   	    Evoluc_masc(Arch_Veter);
+   	    fclose(Arch_Veter);
    	    break;
    }
    	}while(Opc!=4);
 }
 
 
-void list_turnos(FILE *t){
+void list_turnos(){
 	
 }
 
-void Evoluc_masc(FILE *m){
+void Evoluc_masc(){
 	
 }
