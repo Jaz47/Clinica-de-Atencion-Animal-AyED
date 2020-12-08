@@ -33,9 +33,9 @@ main(){
 
 void reg_veter(){
 	Veterinario vet;
+	FILE *Arch_Veter;
 	
-	
-	v=fopen("Veterinarios.dat", "a+b");
+	Arch_Veter=fopen("Veterinarios.dat", "a+b");
 	
 	_flushall();
 	
@@ -54,5 +54,5 @@ void reg_veter(){
     gets(vet.Telefono);
 		
 	fwrite(&vet, sizeof(Veterinario),1,v);
-	fclose(m);
+	fclose(Arch_Veter);
 }
