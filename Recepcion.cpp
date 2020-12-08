@@ -64,19 +64,19 @@ main(){
    
    switch (Opc){
    	case 1:
-	break;
-		   
-   	case 2: reg_mascota(); 
-   			
+   	case 2:
+   		m=fopen("Mascotas.dat","a+b");
+   		reg_mascota; 
+   		fclose(m);
    	break;
    	
-        case 3: reg_turnos();
-   		 
-   	break;
+   	case 3:
+   		 t=fopen("Turnos.dat","rb");
+   		 reg_turnos(t);
+   		 fclose(t);
+   		break;
    		
    	case 4:
-        
-	break;
    }
 	}while (Opc != 5);
 }
@@ -115,7 +115,7 @@ void reg_mascota(){
     scanf("%f", &masc.Peso);
     
     _flushall();
-    printf("Telefono del DueÃ±o: ");
+    printf("Telefono del Dueño: ");
     gets(masc.Telefono);
 		
 	fwrite(&masc, sizeof(Mascota),1,m);
@@ -127,7 +127,7 @@ void reg_turnos(){
 	Mascota masc;
 	Veterinario vet;
 	int mat;
-	bool b=false;
+	bool b==false;
 	
 	printf("Ingresar las Matricula del Veterinario: ");
 	scanf("%d", &mat);
@@ -157,7 +157,7 @@ void reg_turnos(){
 	if(b==false){
 		printf("Matricula Ingresada NO valida");
 	}
-	
+	fclose(m);
 	fclose(t);
 	
 }
@@ -170,8 +170,8 @@ void listVetFecha(){
 	fecha fec;
 	cadena apeynom;
 	
-	printf("Ingresar fecha de atencion que desea buscar (dia/mes/aÃ±o): ");
-	scanf("%d/%d/%d", &d,&m,&a);
+	printf("Ingresar fecha de atencion que desea buscar (dia/mes/año): ");
+	scanf("%d/%d/%d", &d,m,a);
 	_flushall();
 	printf("\nIngresar apellido y nombre del veterinario que desea buscar: ");
 	gets(apeynom);
