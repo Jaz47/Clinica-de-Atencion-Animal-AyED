@@ -1,46 +1,7 @@
 #include<stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-
-
-struct fecha{
-	int dia, mes, anio;	
-};
-
-
-
-struct Usuarios{
-	char usuario[10];
-	char contras[10];   
-	char ape_y_nomb[60];
-};
-
-struct Veterinario{
-    char ApellidoyNombre[60];
-    int Matricula; 
-    int DNI;
-    char Telefono[25];
-};
-
-struct Mascota{
-	char Apellido_y_Nombre[60];
-    char Domicilio [60];
-    int DNI_Duenio ;
-    char Localidad[60];
-    fecha Fecha_de_Nac;
-    float Peso; 
-    char Telefono[25];
-};
-
-typedef char cadena[380];
-
-struct Turnos{
-	int Matricula_de_Veterinario;
-    fecha Fecha ;
-    int DNI_Duenio; 
-    cadena Detalle_de_Atencion[380];
-};
+#include"calculos.h"
 
 void reg_mascota();
 void reg_turnos();
@@ -48,6 +9,7 @@ void listVetFecha();
 
 main(){
 	int Opc;
+	FILE *Arch_Turns, *Arch_Veter, *Arch_Masc;
 	
 	do{
   printf("\t-----------------------------------------------\n");
@@ -65,18 +27,18 @@ main(){
    switch (Opc){
    	case 1:
    	case 2:
-   		m=fopen("Mascotas.dat","a+b");
+   		Arch_Masc=fopen("Mascotas.dat","a+b");
    		reg_mascota; 
-   		fclose(m);
+   		fclose(Arch_Masc);
    	break;
    	
    	case 3:
-   		 t=fopen("Turnos.dat","rb");
-   		 reg_turnos(t);
-   		 fclose(t);
+   		 Arch_Turns=fopen("Turnos.dat","rb");
+   		 reg_turnos(Arch_Turns);
+   		 fclose(Arch_Turns);
    		break;
    		
-   	case 4:
+   	case 4:;
    }
 	}while (Opc != 5);
 }
@@ -85,7 +47,7 @@ main(){
 void reg_mascota(){
 	Mascota masc;
 	
-	m=fopen("Mascotas.dat", "a+b");
+	Arch_Masc=fopen("Mascotas.dat", "a+b");
 	
 	_flushall();
 	
@@ -115,11 +77,11 @@ void reg_mascota(){
     scanf("%f", &masc.Peso);
     
     _flushall();
-    printf("Telefono del Dueño: ");
+    printf("Telefono del DueÃ±o: ");
     gets(masc.Telefono);
 		
-	fwrite(&masc, sizeof(Mascota),1,m);
-	fclose(m);
+	fwrite(&masc, sizeof(Mascota),1,Arch_Masc);
+	fclose(Arch_Masc);
 }
 
 void reg_turnos(){
@@ -131,12 +93,12 @@ void reg_turnos(){
 	
 	printf("Ingresar las Matricula del Veterinario: ");
 	scanf("%d", &mat);
-	t=fopen("Turnos.dat","a+b");
+	Arch_Turns=fopen("Turnos.dat","a+b");
 	
-	v=fopen("Veterinarios.dat", "rb");
-	fread(&vet, sizeof(Veterinario),1,v);
+	Arch_Veter=fopen("Veterinarios.dat", "rb");
+	fread(&vet, sizeof(Veterinario),1,Arch_Veter);
 	
-	while(!feof(v)){
+	while(!feof(Arch_Veter)){
 		if(mat==vet.Matricula){
 			turn.Matricula_de_Veterinario=vet.Matricula;
 			printf("\nDni del duenio de la mascota: ");
@@ -145,42 +107,70 @@ void reg_turnos(){
 			printf("/n Fecha del Turno (dia/mes/anio): ");
 			scanf("%d/%d%d", &turn.Fecha.dia,turn.Fecha.mes,turn.Fecha.anio);
 			
-			_flushall();
-			printf("\nDetalle de Atencion: ");
-			gets(turn.Detalle_de_Atencion);
 			
-			fwrite(&turn, sizeof(Turnos),1,t);
+			fwrite(&turn, sizeof(Turnos),1,Arch_Turns);
 			b=true;
 		}
-		fread(&vet, sizeof(Veterinario),1,v);
+		fread(&vet, sizeof(Veterinario),1,Arch_Veter);
 	}
 	if(b==false){
 		printf("Matricula Ingresada NO valida");
 	}
-	fclose(m);
-	fclose(t);
+	fclose(Arch_Veter);
+	fclose(Arch_Turns);
 	
 }
 
 void listVetFecha(){
-	int d,m,a
+	int d,m,a,mat;
 	Turnos tur;
 	Veterinario vet;
-	Mascota masc;
 	fecha fec;
-	cadena apeynom;
 	
-	printf("Ingresar fecha de atencion que desea buscar (dia/mes/año): ");
-	scanf("%d/%d/%d", &d,m,a);
-	_flushall();
-	printf("\nIngresar apellido y nombre del veterinario que desea buscar: ");
-	gets(apeynom);
 	
-	t=fopen("Turnos.dat", "r+b");
-	v=fopen("Veterinarios.dat", "r+b");
-	m=fopen("Mascotas.dat", "r+b");
+	printf("Ingresar dia de atencion que desea buscar: ");
+	scanf("%d", &d);
+	printf("Ingresar  mes de atencion que desea buscar: ");
+	scanf("%d", &m);
+	printf("Ingresar aÃ±o de atencion que desea buscar: ");
+	scanf("%d", &a);
 	
-	fread(&vet,sizeof(Veterinario),1,v);
-	fread(&masc,sizeof(Mascota),1,m);
-	fread(&tur,sizeof(Turnos),1,t);
+	printf("\nIngresar Matricula del Veterinario que desea buscar: ");
+	scanf("%d", &mat)
+	
+	Arch_Turns=fopen("Turnos.dat", "r+b");
+	Arch_Veter=fopen("Veterinarios.dat", "r+b");
+	
+	
+	
+	while(!feof(Arch_Veter)){
+		if(mat==vet.Matricula){
+			while(!feof(Arch_Turns)){
+				if (d==tur.Fecha.dia){
+					while(!feof(Arch_Turns)){
+						if (m==tur.Fecha.mes){
+							while(!feof(Arch_Turns)){
+								if (a==tur.Fecha.anio){
+									printf("\nMatricula del Veterinario a cargo: ");
+									puts(vet.Matricula);
+									printf("\nFecha de la consulta:");
+									printf("\nDIA: %d",tur.Fecha.dia);
+									printf("\nMES: %d",tur.Fecha.mes);
+									printf("\nANIO: %d",tur.Fecha.anio);
+								}
+								fread(&tur,sizeof(Turnos),1,Arch_Turns);
+							}
+						}
+						fread(&tur,sizeof(Turnos),1,Arch_Turns);
+					}
+				}
+				fread(&tur,sizeof(Turnos),1,Arch_Turns);
+			}
+		}
+		fread(&vet,sizeof(Veterinario),1,Arch_Veter);
+	}
+	
+	fclose(Arch_Veter);
+	fclose(Arch_Turns);
+	
 }
