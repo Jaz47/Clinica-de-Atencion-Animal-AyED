@@ -154,9 +154,7 @@ void listVetFecha(){
 									printf("\nMatricula del Veterinario a cargo: ");
 									puts(vet.Matricula);
 									printf("\nFecha de la consulta:");
-									printf("\nDIA: %d",tur.Fecha.dia);
-									printf("\nMES: %d",tur.Fecha.mes);
-									printf("\nANIO: %d",tur.Fecha.anio);
+									printf("\nDia/ Mes/ Anio: %d/ %d/ %d",tur.Fecha.dia,tur.Fecha.mes,tur.Fecha.anio );
 								}
 								fread(&tur,sizeof(Turnos),1,Arch_Turns);
 							}
