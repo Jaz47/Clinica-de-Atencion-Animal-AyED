@@ -3,16 +3,14 @@
 #include <string.h>
 #include "calculos.h"
 
-FILE *Arch_Turns;
 
-void list_turnos(FILE *Arch_Turns);
+void list_turnos();
 void Evoluc_masc();
 
 main(){
 	FILE *Arch_Veter;
 	Arch_Veter=fopen("Veterinarios.dat", "a+b");
 	int Opc;
-	bool Sesion=false;
 	
 	do{
 		printf("\t------------------------------------------------------\n");
@@ -29,11 +27,16 @@ main(){
    
    switch(Opc){
    	case 1:
+   	case 2:
+   	    t=fopen("Turnos.dat","rb");
+   	    if(t==NULL){
+   	    	printf("LO SENTIMOS NO SE REGISTRAN TURNOS\n");
+   	    	system("pause");
+   	    	break;
+		   }
+		   list_turnos(t);
+		   fclose(t);
 		   break;
-   	case 2: if(!Sesion) printf("Inicie Sesion para continuar\n");
-		   
-		   list_turnos(Arch_Turns);
-   	    
    	case 3:
    	    Arch_Veter=fopen("Mascotas.dat","a+b");
    	    Evoluc_masc(Arch_Veter);
@@ -44,24 +47,7 @@ main(){
 }
 
 
-void list_turnos(FILE *Arch_Turns){
-	Turnos Turns;
-	
-	Arch_Turns=fopen("Turnos.dat","rb");
-	if(Arch_Turns==NULL){
-		printf("\n\t¡EROOR!.. El Archivo no Pudo Abrirse");
-		exit(1);
-	}
-	
-	printf("\nLA LISTA DE ESPERA ES\n");
-	fread(&Turns, sizeof(Turnos), 1,Arch_Turns);
-	while(!feof(Arch_Turns)){  //Mientras no sea final de archivo
-	printf("\n%d/%d/%d",Turns.Fecha.dia,Turns.Fecha.mes,Turns.Fecha.anio);
-		fread(&Turns, sizeof(Turnos), 1,Arch_Turns);
-	}
-	printf("\n\n");
-	fclose(Arch_Turns);
-		
+void list_turnos(){
 	
 }
 
