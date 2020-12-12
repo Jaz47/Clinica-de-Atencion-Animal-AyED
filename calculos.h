@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*
 void menuPrincipal();
 
 
@@ -15,7 +16,7 @@ system("cls");
   printf("\t| 4-> Salir                            |\n");
   printf("\t----------------------------------------\n");
  }
-
+*/
 struct fecha{
 	int dia, mes, anio;	
 };
@@ -36,7 +37,7 @@ struct Veterinario{
 };
 
 struct Mascota{
-	char Apellido_y_Nombre[60];
+    char Apellido_y_Nombre[60];
     char Domicilio [60];
     int DNI_Duenio ;
     char Localidad[60];
@@ -48,10 +49,10 @@ struct Mascota{
 typedef char cadena[380];
 
 struct Turnos{
-	int Matricula_de_Veterinario;
+    int Matricula_de_Veterinario;
     fecha Fecha ;
     int DNI_Duenio; 
-    cadena Detalle_de_Atencion[380];
+    char Detalle_de_Atencion[380];
     bool borrado;
 };
 
