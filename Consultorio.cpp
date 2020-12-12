@@ -47,7 +47,26 @@ main(){
 }
 
 
-void list_turnos(){
+void list_turnos(FILE *Arch_Turns){
+	Turnos Turns;
+	
+	Arch_Turns=fopen("Turnos.dat","rb");
+	if(Arch_Turns==NULL){
+		printf("\n\tÂ¡EROOR!.. El Archivo no Pudo Abrirse");
+		exit(1);
+	}
+	
+	printf("\nLA LISTA DE ESPERA ES\n");
+	fread(&Turns, sizeof(Turnos), 1,Arch_Turns);
+	while(!feof(Arch_Turns)){  //Mientras no sea final de archivo
+	printf("\n%d/%d/%d",Turns.Fecha.dia,Turns.Fecha.mes,Turns.Fecha.anio);
+		fread(&Turns, sizeof(Turnos), 1,Arch_Turns);
+	}
+	printf("\n\n");
+	fclose(Arch_Turns);
+		//FALTA CORREGIR, IMCOMPLETO
+	
+}
 	
 }
 
