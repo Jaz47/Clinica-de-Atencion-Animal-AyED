@@ -3,13 +3,20 @@
 #include <string.h>
 #include"calculos.h"
 
-void reg_mascota();
-void reg_turnos();
-void listVetFecha();
+//Archivos utilizados
+FILE *Arch_Veter;
+FILE *Arch_Usua;
+FILE *Arch_Turns;
+FILE *Arch_Masc;
+
+
+void reg_mascota(FILE *Arch_Masc);
+void reg_turnos(FILE *Arch_Turns);
+void listVetFecha(FILE *Arch_Veter);
 
 main(){
 	int Opc;
-	FILE *Arch_Turns, *Arch_Veter, *Arch_Masc;
+	bool Inicio=false;
 	
 	do{
   printf("\t-----------------------------------------------\n");
@@ -25,17 +32,15 @@ main(){
    scanf("%d", & Opc);
    
    switch (Opc){
-   	case 1:
+   	case 1: 
+   		break;
+   		
    	case 2:
-   		Arch_Masc=fopen("Mascotas.dat","a+b");
-   		reg_mascota; 
-   		fclose(Arch_Masc);
+   		
    	break;
    	
-   	case 3:
-   		 Arch_Turns=fopen("Turnos.dat","rb");
-   		 reg_turnos(Arch_Turns);
-   		 fclose(Arch_Turns);
+   	case 3: 
+   		 
    		break;
    		
    	case 4:;
@@ -49,35 +54,31 @@ void reg_mascota(){
 	
 	Arch_Masc=fopen("Mascotas.dat", "a+b");
 	
-	_flushall();
 	
-		printf("Nombre de la mascota: ");
-		gets(masc.Apellido_y_Nombre);
+	printf("\nNombre de la mascota: ");
+	_flushall();
+	gets(masc.Apellido_y_Nombre);
 		
 	
-	printf("DNI del duenio: ");
+	printf("\nDNI del duenio: ");
 	scanf("%d",&masc.DNI_Duenio);
 	
 	_flushall();
-
-		printf("Domicilio: ");
-		gets(masc.Domicilio);
-		
-	
+	printf("\nDomicilio: ");
+	gets(masc.Domicilio);
 	_flushall();
-	
-		printf("Localidad: ");
-		gets(masc.Localidad);
+	printf("\nLocalidad: ");
+	gets(masc.Localidad);
 		
 	
-	printf("Fecha de nacimiento de la mascota(dia,mes,anio): ");
+	printf("\nFecha de nacimiento de la mascota(dia,mes,anio): ");
     scanf("%d/%d/%d", &masc.Fecha_de_Nac.dia,&masc.Fecha_de_Nac.mes,&masc.Fecha_de_Nac.anio);
     
     printf("\nPeso de la Mascota: ");
-    scanf("%f", &masc.Peso);
+    scanf("%.2f", &masc.Peso);
     
     _flushall();
-    printf("Telefono del Dueño: ");
+    printf("\nTelefono del DueÃ±o: ");
     gets(masc.Telefono);
 		
 	fwrite(&masc, sizeof(Mascota),1,Arch_Masc);
@@ -89,7 +90,7 @@ void reg_turnos(){
 	Mascota masc;
 	Veterinario vet;
 	int mat;
-	bool b==false;
+	bool b=false;
 	
 	printf("Ingresar las Matricula del Veterinario: ");
 	scanf("%d", &mat);
@@ -132,11 +133,11 @@ void listVetFecha(){
 	scanf("%d", &d);
 	printf("Ingresar  mes de atencion que desea buscar: ");
 	scanf("%d", &m);
-	printf("Ingresar año de atencion que desea buscar: ");
+	printf("Ingresar aÃ±o de atencion que desea buscar: ");
 	scanf("%d", &a);
 	
 	printf("\nIngresar Matricula del Veterinario que desea buscar: ");
-	scanf("%d", &mat)
+	scanf("%d", &mat);
 	
 	Arch_Turns=fopen("Turnos.dat", "r+b");
 	Arch_Veter=fopen("Veterinarios.dat", "r+b");
@@ -152,7 +153,7 @@ void listVetFecha(){
 							while(!feof(Arch_Turns)){
 								if (a==tur.Fecha.anio){
 									printf("\nMatricula del Veterinario a cargo: ");
-									puts(vet.Matricula);
+									scanf("%d",&vet.Matricula);
 									printf("\nFecha de la consulta:");
 									printf("\nDia/ Mes/ Anio: %d/ %d/ %d",tur.Fecha.dia,tur.Fecha.mes,tur.Fecha.anio );
 								}
