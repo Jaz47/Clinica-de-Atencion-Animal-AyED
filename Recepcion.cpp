@@ -55,12 +55,12 @@ void reg_mascota(){
 	Arch_Masc=fopen("Mascotas.dat", "a+b");
 	
 	
-	printf("\nNombre de la mascota: ");
+	printf("\nNombre de la Mascota: ");
 	_flushall();
 	gets(masc.Apellido_y_Nombre);
 		
 	
-	printf("\nDNI del duenio: ");
+	printf("\nDNI del Duenio: ");
 	scanf("%d",&masc.DNI_Duenio);
 	
 	_flushall();
@@ -71,7 +71,7 @@ void reg_mascota(){
 	gets(masc.Localidad);
 		
 	
-	printf("\nFecha de nacimiento de la mascota(dia,mes,anio): ");
+	printf("\nFecha de nacimiento de la Mascota(dia,mes,anio): ");
     scanf("%d/%d/%d", &masc.Fecha_de_Nac.dia,&masc.Fecha_de_Nac.mes,&masc.Fecha_de_Nac.anio);
     
     printf("\nPeso de la Mascota: ");
@@ -115,7 +115,7 @@ void reg_turnos(){
 		fread(&vet, sizeof(Veterinario),1,Arch_Veter);
 	}
 	if(b==false){
-		printf("Matricula Ingresada NO valida");
+		printf(" Disculpe su Matricula Ingresada NO es valida");
 	}
 	fclose(Arch_Veter);
 	fclose(Arch_Turns);
