@@ -10,7 +10,7 @@ FILE *Arch_Turns;
 FILE *Arch_Masc;
 
 //Funciones Globales Utilizadas
-bool Iniciar_Ses(FILE *Arch_Veter);
+bool Iniciar_Ses();
 void list_turnos(FILE *Arch_Veter);  // Mostrar los turnos de la fecha, osea cuantos registros hay para esa fecha
 void Evoluc_masc();   // Modulo Asistente
 
@@ -33,42 +33,34 @@ main(){
    //system("cls");
    
    switch(Opc){
-   	case 1: Inicio=Iniciar_Ses(Arch_Veter);
-   	        
-   		break;
-   	case 2: if(!Inicio) printf("\nDebe Iniciar Sesion, para poder Continual");
-   	        else Iniciar_Ses(Arch_Veter);
+   	case 1: Inicio=Iniciar_Ses();
+   	        break;
+   	case 2: if(!Inicio) printf("\nDebe Iniciar Sesion para poder Continuar!!!!!!\n\n");
+   	        else Iniciar_Ses();
    	    break;
-   	case 3:
+   	case 3: if(!Inicio) printf("\nDebe Iniciar Sesion para poder Continuar!!!!!!\n\n");
+   	        else Iniciar_Ses();
    	    break;
    }
    	}while(Opc!=4);
 }
 //Inicio de Sesion
-bool Iniciar_Ses(FILE *Arch_Veter){
-	int Matricula;
-	Veterinario Vetr;
+bool Iniciar_Ses(){
+	FILE *Arch_Usua=fopen("Veterinarios.dat","rb");
 	
-	Arch_Veter=fopen("Veterinarios.dat","rb");
-	printf("\nIngresar matricula: ");
-	scanf("%d",&Matricula);
+	Veterinario vet;
+	cadena mat,pass;
+	printf("\nIngrese la Matricula del Veterinario: \n");
+	_flushall();
+	gets(mat);
+	printf("\nIngrese su Contrasenia: \n");
+	gets(pass);
 	
-	rewind(Arch_Veter);
-	fread(&Vetr, sizeof(Veterinario), 1,Arch_Veter);
+	fread(&vet, sizeof(vet),1,Arch_Veter);
 	while(!feof(Arch_Veter)){
-		if(Matricula==Vetr.Matricula){
-			printf("\nBienvenido al Consultorio");
-			return true;
-		}
-		else{
-			printf("\nMatricula Incorrecta\n");
-			printf("Intentelo de Nuevo\n");
-		}
-		system("pause");
-	}
-	return false;
-	
-	
+		if (vet.Matricula==0 && strcmp(vet.contras,pass)==0);
+	}return true;
+	fread(&vet, sizeof(vet),1,Arch_Veter);
 }
 
 void list_turnos(FILE *Arch_Turns){  //Falta Corregir detalles
