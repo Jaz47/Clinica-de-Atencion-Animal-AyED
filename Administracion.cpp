@@ -206,4 +206,26 @@ void aten_vet(*FILE Veterinarios){
 		}
 	}while(b==0);
 }
+bool crearRank(){
+	FILE *veterinarios = fopen("veterinarios.dat");
+	Veterinario lectura;
+	int matriculas[100];
+	int cantidades [100];
+	c=0
+	
+	fread(&lectura,sizeof(veterinario),1,veterinarios);
+	while(!feof(veterinarios)){
+		matriculas[c] =lectura.Matricula;
+		cantidades[c] =aten_vet(turnos,lectura,matricula);
+		fread (&lectura, sizeof (veterinario), 1,veterinarios);
+	}
+	
+	
+	burbuja()
+	
+	
+	
+	
+}
+
 
