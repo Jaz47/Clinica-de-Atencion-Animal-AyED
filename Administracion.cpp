@@ -50,7 +50,7 @@ main(){
    }
    
 	}while(Opc!=5);
-	bool crearRank(){
+	bool crearRank(){//ranking
 	FILE *veterinarios = fopen("veterinarios.dat");
 	Veterinario lectura;
 	int matriculas[100];
