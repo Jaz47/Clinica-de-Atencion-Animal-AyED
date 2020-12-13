@@ -9,7 +9,7 @@ FILE *Arch_Usua;
 FILE *Arch_Turns;
 FILE *Arch_Masc;
 
-
+bool Iniciar_Ses();
 void reg_mascota(FILE *Arch_Masc);
 void reg_turnos(FILE *Arch_Turns);
 void listVetFecha(FILE *Arch_Veter);
@@ -32,20 +32,43 @@ main(){
    scanf("%d", & Opc);
    
    switch (Opc){
-   	case 1: 
+   	case 1: Inicio = Iniciar_Ses(); 
+	    	if (Inicio) printf("BIENVENIDO!!!\n");
+	    	else printf("ERROR en inicio de sesion. VUELVA A INTENTARLO!!!\n");
    		break;
    		
-   	case 2:
-   		
-   	break;
+   	case 2: if (!Inicio) printf("Inicie sesion para continuar\n");
+			else Iniciar_Ses();
+   		break;
    	
-   	case 3: 
-   		 
-   		break;
+   	case 3: if (!Inicio) printf("Inicie sesion para continuar\n");
+			else Iniciar_Ses();
+   		 	break;
    		
-   	case 4:;
+   	case 4:if (!Inicio) printf("Inicie sesion para continuar\n");
+			else Iniciar_Ses();
+			break;
    }
 	}while (Opc != 5);
+}
+
+bool Iniciar_Ses(){
+	FILE *Arch_Usua=fopen("Usuarios.dat","rb");
+	Usuarios lect;
+	cadena nom,pass;
+	printf("Ingrese el nombre de Usuario: ");
+	_flushall();
+	gets(nom);
+	printf("Ingrese la contraseña del Usuario: ");
+	gets(pass);
+	
+	fread(&lect, sizeof(lect),1,Arch_Usua);
+	while(!feof(Arch_Usua)){
+		if (strcmp(lect.usuario,nom)==0);
+		//&& strcmp(lect.contras,pass)==0);
+	}return true;
+	fread (&lect, sizeof(lect),1,Arch_Usua);
+	fclose(Arch_Usua);
 }
 
 
