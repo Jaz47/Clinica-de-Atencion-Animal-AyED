@@ -135,7 +135,7 @@ void Usuario_Unic(FILE *Arch_Usua){
 	
 }
 
-bool Contr_Valid(cadena Contra){  //Validacion de la Contraseña
+bool Contr_Valid(cadena Contra){  //Validacion de la ContraseÃ±a
 	
 	int may = 0, min = 0, num = 0, otros = 0, numcons = 0;
 	
@@ -163,11 +163,11 @@ bool Contr_Valid(cadena Contra){  //Validacion de la Contraseña
 	       strlen(Contra)>=6 && 
 		   strlen(Contra)<=32 && 
 		   numcons<=3 && 
-		   validarConsecutivasPass(Contra); //Guardamos la contraseña en esta funcion, para luego comparar las consecutivas
+		   validarConsecutivasPass(Contra); //Guardamos la contraseÃ±a en esta funcion, para luego comparar las consecutivas
 }
-bool validarConsecutivasPass(cadena Contra){  //Tiene todas las Validaciones para la o las contraseñas
+bool validarConsecutivasPass(cadena Contra){  //Tiene todas las Validaciones para la o las contraseÃ±as
 	int letrasCons = 1;
-	cadena Contr2;   //Creamos una nueva cadena para la contraseña
+	cadena Contr2;   //Creamos una nueva cadena para la contraseÃ±a
 	strcpy(Contr2, Contra);
 	strlwr(Contr2);  //Convierte la cadena de Mayusc a Minusc.
 	//aBuel123
@@ -181,19 +181,19 @@ bool validarConsecutivasPass(cadena Contra){  //Tiene todas las Validaciones par
 	}	
 	return letrasCons < 2;
 }
-	
+printf("\nIngrese Matricula del Veterinario:");
+	    scanf("%d",&mat)	
 void aten_vet(*FILE Veterinarios){
 	char a;
 	int b=0;
 	Turnos tur;
 	int mat;
 	
-	printf("\n                         °°ATENCION POR VETERINARIA°°");
+	printf("\n                         Â°Â°ATENCION POR VETERINARIAÂ°Â°");
 	printf("****************************************************************************************")
 	
 	do{
-		printf("\nIngrese Matricula del Veterinario:");
-	    scanf("%d",&mat)
+		
 		fread(&a, sizeof(Turnos),1,Veterinarios);
 		while(!feof(Veterinarios)){
 			if(mat==tur.Matricula_de_Veterinario){
@@ -206,6 +206,7 @@ void aten_vet(*FILE Veterinarios){
 		}
 	}while(b==0);
 }
+
 bool crearRank(){
 	FILE *veterinarios = fopen("veterinarios.dat");
 	Veterinario lectura;
@@ -227,5 +228,9 @@ bool crearRank(){
 	
 	
 }
+
+	
+	
+
 
 
