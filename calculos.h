@@ -31,6 +31,7 @@ struct Usuarios{
 
 struct Veterinario{
     char ApellidoyNombre[60];
+    char contras[10]; 
     int Matricula; 
     int DNI;
     char Telefono[25];
