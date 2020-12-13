@@ -182,5 +182,28 @@ bool validarConsecutivasPass(cadena Contra){  //Tiene todas las Validaciones par
 	return letrasCons < 2;
 }
 	
-
+void aten_vet(*FILE Veterinarios){
+	char a;
+	int b=0;
+	Turnos tur;
+	int mat;
+	
+	printf("\n                         °°ATENCION POR VETERINARIA°°");
+	printf("****************************************************************************************")
+	
+	do{
+		printf("\nIngrese Matricula del Veterinario:");
+	    scanf("%d",&mat)
+		fread(&a, sizeof(Turnos),1,Veterinarios);
+		while(!feof(Veterinarios)){
+			if(mat==tur.Matricula_de_Veterinario){
+				printf("\n\nMatricula del Veterinario: %d", tur.Matricula_de_Veterinario);
+				printf("\nDNI del duenio: %d", tur.DNI_Duenio);
+				printf("\nDetalles de la Atencion: %s ",tur.Detalle_de_Atencion);
+				b=1;
+			}
+			fread(&a, sizeof(Turnos),1,Veterinarios);
+		}
+	}while(b==0);
+}
 
