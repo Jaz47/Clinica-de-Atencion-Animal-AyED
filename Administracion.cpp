@@ -9,12 +9,13 @@ FILE *Arch_Usua;
 FILE *Arch_Turns;
 FILE *Arch_Masc;
 
+
 //Funciones Utilizadas
 void reg_veter(FILE *Arch_Veter);
 void Usuario_Valid(FILE *Arch_Usua, cadena &Contra);  //Contine la Carga y las coniciones
 void Usuario_Unic(FILE *Arch_Usua);  
 void password(FILE *usuario, cadena &password);
-void aten_vet();
+void atent_vet();
 
 main(){
 	
@@ -29,29 +30,26 @@ main(){
          printf("\t| 4-> Ranking de Veterinario por Atencion     |\n");
          printf("\t| 5-> Cerrar Aplicacion                       |\n");
          printf("\t-----------------------------------------------\n");
-   
-   
-   printf("\nIngresar Opcion: ");
-   scanf("%d", &Opc);
-   
-   switch (Opc){
-   	case 1: reg_veter(Arch_Veter);  //Crear Usuarios para el Modul. de Consultorio
+		 printf("\nIngresar Opcion: ");
+		 scanf("%d", &Opc);
+		 switch (Opc){
+		 case 1: reg_veter(Arch_Veter);  //Crear Usuarios para el Modul. de Consultorio
 		   break;
-   	case 2: Usuario_Valid(Arch_Usua,Clv);  //Crear Usuarios para Modul. Asistente
+		case 2: Usuario_Valid(Arch_Usua,Clv);  //Crear Usuarios para Modul. Asistente
 		   break;
-   	case 3:
+		case 3:
 		   break;
-   	case 4:
+		case 4:
 		   break;
-	case 5 
-		break;
    	
    }
    
 	}while(Opc!=5);
 	
+	
+	
 	void Ranking(FILE *Archi_Turns){
-		
+	Return (FILE *Arch_Masc,atent_vet())
 	bool crearRank(){//ranking
 	FILE *veterinarios = fopen("veterinarios.dat");
 	Veterinario lectura;
@@ -67,12 +65,12 @@ main(){
 	}
 	
 	
-	burbuja()
-
+	burbuja()}
 	
-	}
 	
-} 
+	
+	
+}
 
 void reg_veter(FILE *Arch_Veter){
 	Veterinario vet;
@@ -243,12 +241,5 @@ void aten_vet(*FILE Veterinarios){
 		}
 	}while(b==0);
 }
-
-
 }
-
-	
-	
-
-
 
