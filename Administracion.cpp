@@ -49,7 +49,10 @@ main(){
    }
    
 	}while(Opc!=5);
-	/*bool crearRank(){//ranking
+	
+	void Ranking(FILE *Archi_Turns){
+		
+	bool crearRank(){//ranking
 	FILE *veterinarios = fopen("veterinarios.dat");
 	Veterinario lectura;
 	int matriculas[100];
@@ -65,11 +68,11 @@ main(){
 	
 	
 	burbuja()
-	*/
+
 	
+	}
 	
-	
-}
+} 
 
 void reg_veter(FILE *Arch_Veter){
 	Veterinario vet;
@@ -214,7 +217,7 @@ void password(FILE *usuario, cadena &password){
 	 
 }
 
-/*
+
 printf("\nIngrese Matricula del Veterinario:");
 	    scanf("%d",&mat)	
 void aten_vet(*FILE Veterinarios){
@@ -243,7 +246,7 @@ void aten_vet(*FILE Veterinarios){
 
 
 }
-*/
+
 	
 	
 
