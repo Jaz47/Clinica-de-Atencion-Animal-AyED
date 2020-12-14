@@ -10,9 +10,9 @@ FILE *Arch_Turns;
 FILE *Arch_Masc;
 
 //Funciones Globales Utilizadas
-bool Iniciar_Ses();
-void list_turnos(FILE *Arch_Veter);  // Mostrar los turnos de la fecha, osea cuantos registros hay para esa fecha
-void Evoluc_masc();   // Modulo Asistente
+bool Iniciar_Ses(FILE *Arch_Veter);
+void list_turnos(FILE *Arch_Turns);  // Mostrar los turnos de la fecha, osea cuantos registros hay para esa fecha
+void Evoluc_masc(FILE *Arch_Turns);   // Modulo Asistente
 
 main(){
 	int Opc;
@@ -33,34 +33,50 @@ main(){
    //system("cls");
    
    switch(Opc){
-   	case 1: Inicio=Iniciar_Ses();
+   	case 1: Inicio=Iniciar_Ses(Arch_Veter);
+   	        if(Inicio) printf("Inicio a sesion\n");
+   	        else printf("Error de Inicio\n");
    	        break;
    	case 2: if(!Inicio) printf("\nDebe Iniciar Sesion para poder Continuar!!!!!!\n\n");
-   	        else Iniciar_Ses();
+   	        
+   	        else Iniciar_Ses(Arch_Veter);
+   	          list_turnos(Arch_Turns);
    	    break;
    	case 3: if(!Inicio) printf("\nDebe Iniciar Sesion para poder Continuar!!!!!!\n\n");
-   	        else Iniciar_Ses();
+   	        else Iniciar_Ses(Arch_Veter);
+   	        Evoluc_masc(Arch_Turns);
    	    break;
    }
    	}while(Opc!=4);
 }
 //Inicio de Sesion
-bool Iniciar_Ses(){
-	FILE *Arch_Usua=fopen("Veterinarios.dat","rb");
+bool Iniciar_Ses(FILE *Arch_Veter){
+	int Matr;
+	cadena pass;
+	Veterinario Vetr;
 	
-	Veterinario vet;
-	cadena mat,pass;
-	printf("\nIngrese la Matricula del Veterinario: \n");
-	_flushall();
-	gets(mat);
-	printf("\nIngrese su Contrasenia: \n");
+	Arch_Veter=fopen("Veterinarios.dat","rb");
+	printf("\nIngresar matricula: ");
+    scanf("%d",&Matr);
+	printf("\nIngresar clave: ");
 	gets(pass);
 	
-	fread(&vet, sizeof(vet),1,Arch_Veter);
+	rewind(Arch_Veter);
+	fread(&Vetr, sizeof(Vetr), 1,Arch_Veter);
 	while(!feof(Arch_Veter)){
-		if (vet.Matricula==0 && strcmp(vet.contras,pass)==0);
-	}return true;
-	fread(&vet, sizeof(vet),1,Arch_Veter);
+		if(Vetr.Matricula==Matr && strcmp(Vetr.contras,pass)==0){
+			printf("\nBienvenido al Consultorio");
+			return true;
+		}
+		else{
+			printf("\nMatricula Incorrecta\n");
+			printf("Intentelo de Nuevo\n");
+		}
+		system("pause");
+	}
+	return false;
+	
+	
 }
 
 void list_turnos(FILE *Arch_Turns){  //Falta Corregir detalles
@@ -69,7 +85,7 @@ void list_turnos(FILE *Arch_Turns){  //Falta Corregir detalles
 	
 	Arch_Turns=fopen("Turnos.dat","rb");
 	if(Arch_Turns==NULL){
-		printf("\n\tÃ‚Â¡EROOR!.. El Archivo no Pudo Abrirse");
+		printf("\n\tÃƒâ€šÃ‚Â¡EROOR!.. El Archivo no Pudo Abrirse");
 		exit(1);
 	}
 	printf("\nIngresar fecha para mostrar sus respectivos turnos: ");
@@ -88,38 +104,46 @@ void list_turnos(FILE *Arch_Turns){  //Falta Corregir detalles
 	
 }
 	
+void Evoluc_masc(FILE *Arch_Turns){
+   Arch_Turns = fopen("Turnos.dat","r+b");
 
-
-void Evoluc_masc(){
-	Veterinario Veter;
-	Mascota masc;
-	Turnos tur;
-	cadena apynom;
+	Turnos turno;
+	int dni;
+	bool bandera = false;
 	
-	_flushall();
-	printf("Apellido y Nombre de la mascota a atender: ");
-	gets(apynom);
-	Arch_Turns=fopen("Turnos.dat", "r+b");
-	Arch_Masc=fopen("Mascotas.dat", "r+b");
+	printf("\nIngrese el DNI del duenio de la mascota a atender: ");
+	scanf("%d", &dni);
 	
-	while(!feof(Arch_Masc)){
-		if(strcmp(apynom,masc.Apellido_y_Nombre)==0){
-			while(!feof(Arch_Turns)){
-				if(masc.DNI_Duenio==tur.DNI_Duenio){
-					rewind(Arch_Masc);
-					printf("\nDetalle de evolucion de la mascota: \n ");
-					scanf("%s",&tur.Detalle_de_Atencion);
-					tur.borrado=true;
-			//		fseek(Arch_Masc, -sizeof(Turnos), SEEK_CUR);  //Retrocede
-					fwrite(&masc,sizeof(Mascota),1, Arch_Masc);
-					printf("El Registro se dio de baja\n\n");
-					printf("\n");
-				}
-				fread(&tur,sizeof(Turnos),1,Arch_Turns);
-			}
+	rewind(Arch_Turns);
+	
+	fread(&turno, sizeof(Turnos), 1, Arch_Turns);
+	while(!feof(Arch_Turns) && bandera == false){
+		
+		if(turno.DNI_Duenio == dni && turno.borrado == false){
+					
+			printf("\nDescriba la evolucion de la mascota");
+	
+			_flushall();
+			gets(turno.Detalle_de_Atencion);
+			
+			turno.borrado = true;
+					
+			fseek(Arch_Turns, -sizeof(Turnos), SEEK_CUR);
+			fwrite(&turno, sizeof(Turnos), 1, Arch_Turns);
+			printf("Registro dado de baja");
+			printf("\n");
+	        system("pause");
+			bandera = true;
 		}
-		fread(&masc,sizeof(Mascota),1,Arch_Masc);
+
+		else{
+			fread(&turno, sizeof(Turnos), 1, Arch_Turns);
+		}
 	}
-	fclose(Arch_Masc);
+	
+	if(bandera == false){
+		printf("\nEl DNI ingresado no existe en los registros.");
+	}
 	fclose(Arch_Turns);
 }
+
