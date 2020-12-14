@@ -8,10 +8,9 @@ FILE *Arch_Veter;
 FILE *Arch_Usua;
 FILE *Arch_Turns;
 FILE *Arch_Masc;
-
-bool Iniciar_Ses();
+bool Iniciar_Ses(FILE *Arch_Usua);
 void reg_mascota(FILE *Arch_Masc);
-void reg_turnos(FILE *Arch_Turns);
+void Reg_Turns(FILE *Arch_Veter);
 void listVetFecha(FILE *Arch_Veter);
 
 main(){
@@ -20,7 +19,7 @@ main(){
 	
 	do{
   printf("\t-----------------------------------------------\n");
-  printf("\t|      **Modulo de Asistente**                |\n");
+  printf("\t|      *Modulo de Asistente*                |\n");
   printf("\t| 1-> Iniciar Sesion                          |\n");
   printf("\t| 2-> Registrar Mascota                       |\n");
   printf("\t| 3-> Registrar Turnos                        |\n");
@@ -32,58 +31,62 @@ main(){
    scanf("%d", & Opc);
    
    switch (Opc){
-   	case 1: Inicio = Iniciar_Ses(); 
+   	case 1: Inicio=Iniciar_Ses(Arch_Usua); 
 	    	if (Inicio) printf("BIENVENIDO!!!\n");
 	    	else printf("ERROR en inicio de sesion. VUELVA A INTENTARLO!!!\n");
    		break;
    		
    	case 2: if (!Inicio) printf("Inicie sesion para continuar\n");
-			else Iniciar_Ses();
+			else Iniciar_Ses(Arch_Usua);
+			reg_mascota(Arch_Masc);
    		break;
    	
    	case 3: if (!Inicio) printf("Inicie sesion para continuar\n");
-			else Iniciar_Ses();
+			else Iniciar_Ses(Arch_Usua);
+			Reg_Turns(Arch_Turns);
    		 	break;
    		
    	case 4:if (!Inicio) printf("Inicie sesion para continuar\n");
-			else Iniciar_Ses();
+			else Iniciar_Ses(Arch_Usua);
+			listVetFecha(Arch_Veter);
 			break;
    }
 	}while (Opc != 5);
 }
 
-bool Iniciar_Ses(){
-	FILE *Arch_Usua=fopen("Usuarios.dat","rb");
+bool Iniciar_Ses(FILE *Arch_Usua){
+    Arch_Usua=fopen("Usuario.dat","rb");
 	Usuarios lect;
 	cadena nom,pass;
 	printf("Ingrese el nombre de Usuario: ");
 	_flushall();
 	gets(nom);
-	printf("Ingrese la contraseña del Usuario: ");
+	printf("Ingrese la contraseÃ±a del Usuario: ");
 	gets(pass);
 	
-	fread(&lect, sizeof(lect),1,Arch_Usua);
+	fread(&lect, sizeof(lect), 1,Arch_Usua);
 	while(!feof(Arch_Usua)){
-		if (strcmp(lect.usuario,nom)==0);
-		//&& strcmp(lect.contras,pass)==0);
-	}return true;
-	fread (&lect, sizeof(lect),1,Arch_Usua);
+		if (strcmp(lect.usuario,nom)==0
+		&& strcmp(lect.contras,pass)==0)
+		return true;
+			fread (&lect, sizeof(lect), 1,Arch_Usua);
+	}
+
 	fclose(Arch_Usua);
 }
 
-
-void reg_mascota(){
+void reg_mascota(FILE *Arch_Masc){
 	Mascota masc;
 	
 	Arch_Masc=fopen("Mascotas.dat", "a+b");
 	
 	
-	printf("\nNombre de la Mascota: ");
+	printf("\nNombre de la mascota: ");
 	_flushall();
 	gets(masc.Apellido_y_Nombre);
 		
 	
-	printf("\nDNI del Duenio: ");
+	printf("\nDNI del duenio: ");
 	scanf("%d",&masc.DNI_Duenio);
 	
 	_flushall();
@@ -94,21 +97,21 @@ void reg_mascota(){
 	gets(masc.Localidad);
 		
 	
-	printf("\nFecha de nacimiento de la Mascota(dia,mes,anio): ");
+	printf("\nFecha de nacimiento de la mascota(dia,mes,anio): ");
     scanf("%d/%d/%d", &masc.Fecha_de_Nac.dia,&masc.Fecha_de_Nac.mes,&masc.Fecha_de_Nac.anio);
     
     printf("\nPeso de la Mascota: ");
     scanf("%.2f", &masc.Peso);
     
     _flushall();
-    printf("\nTelefono del DueÃ±o: ");
+    printf("\nTelefono del DueÃƒÂ±o: ");
     gets(masc.Telefono);
 		
 	fwrite(&masc, sizeof(Mascota),1,Arch_Masc);
 	fclose(Arch_Masc);
 }
 
-void reg_turnos(){
+void Reg_Turns(FILE *Arch_Veter){
 	Turnos turn;
 	Mascota masc;
 	Veterinario vet;
@@ -138,14 +141,14 @@ void reg_turnos(){
 		fread(&vet, sizeof(Veterinario),1,Arch_Veter);
 	}
 	if(b==false){
-		printf(" Disculpe su Matricula Ingresada NO es valida");
+		printf("Matricula Ingresada NO valida");
 	}
 	fclose(Arch_Veter);
 	fclose(Arch_Turns);
 	
 }
 
-void listVetFecha(){
+void listVetFecha(FILE *Arch_Veter){
 	int d,m,a,mat;
 	Turnos tur;
 	Veterinario vet;
@@ -156,7 +159,7 @@ void listVetFecha(){
 	scanf("%d", &d);
 	printf("Ingresar  mes de atencion que desea buscar: ");
 	scanf("%d", &m);
-	printf("Ingresar aÃ±o de atencion que desea buscar: ");
+	printf("Ingresar aÃƒÂ±o de atencion que desea buscar: ");
 	scanf("%d", &a);
 	
 	printf("\nIngresar Matricula del Veterinario que desea buscar: ");
