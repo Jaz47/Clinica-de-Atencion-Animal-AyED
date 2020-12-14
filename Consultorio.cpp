@@ -81,9 +81,11 @@ bool Iniciar_Ses(FILE *Arch_Veter){
 
 void list_turnos(FILE *Arch_Turns){  //Falta Corregir detalles
 	Turnos Turns;
+	Mascota Masct;
 	int dia,Mes,Anio, Matric;   
 	
 	Arch_Turns=fopen("Turnos.dat","rb");
+	Arch_Masc=fopen("Mascotas.dat","rb");
 	if(Arch_Turns==NULL){
 		printf("\n\tÃƒâ€šÃ‚Â¡EROOR!.. El Archivo no Pudo Abrirse");
 		exit(1);
@@ -95,12 +97,15 @@ void list_turnos(FILE *Arch_Turns){  //Falta Corregir detalles
 	printf("\nLA LISTA DE ESPERA ES\n");
 	fread(&Turns, sizeof(Turnos), 1,Arch_Turns);
 	while(!feof(Arch_Turns)){  //Mientras no sea final de archivo
-	printf("\n%d/%d/%d",Turns.Fecha.dia,Turns.Fecha.mes,Turns.Fecha.anio);
-		fread(&Turns, sizeof(Turnos), 1,Arch_Turns);
+	if(Matric=Turns.Matricula_de_Veterinario && dia==Turns.Fecha.dia && Mes==Turns.Fecha.mes && Anio==Turns.Fecha.anio)
+	printf("\nDomicilio de la mascota: %s",Masct.Domicilio);
+	printf("\nDNI Dueño: %d",Masct.DNI_Duenio);
+	printf("\nPeso de la Mascota: %.2f",Masct.Peso);
+	printf("\n\n");
+		fread(&Masct, sizeof(Mascota), 1,Arch_Masc);
 	}
 	printf("\n\n");
 	fclose(Arch_Turns);
-	
 	
 }
 	
