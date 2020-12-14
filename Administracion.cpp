@@ -9,13 +9,13 @@ FILE *Arch_Usua;
 FILE *Arch_Turns;
 FILE *Arch_Masc;
 
-
 //Funciones Utilizadas
 void reg_veter(FILE *Arch_Veter);
 void Usuario_Valid(FILE *Arch_Usua, cadena &Contra);  //Contine la Carga y las coniciones
-void Usuario_Unic(FILE *Arch_Usua);  
+void Usuario_Unic(FILE *Arch_Usua);  // Compara el usuario que esta en la cargado en el archivo con un nuevo Usuario a Ingresar
 void password(FILE *usuario, cadena &password);
-void atent_vet();
+void Ranking(FILE *Arch_Veter);
+void aten_vet(FILE *Arch_Veter);
 
 main(){
 	
@@ -30,45 +30,24 @@ main(){
          printf("\t| 4-> Ranking de Veterinario por Atencion     |\n");
          printf("\t| 5-> Cerrar Aplicacion                       |\n");
          printf("\t-----------------------------------------------\n");
-		 printf("\nIngresar Opcion: ");
-		 scanf("%d", &Opc);
-		 switch (Opc){
-		 case 1: reg_veter(Arch_Veter);  //Crear Usuarios para el Modul. de Consultorio
+   
+   
+   printf("\nIngresar Opcion: ");
+   scanf("%d", &Opc);
+   
+   switch (Opc){
+   	case 1: reg_veter(Arch_Veter);  //Crear Usuarios para el Modul. de Consultorio
 		   break;
-		case 2: Usuario_Valid(Arch_Usua,Clv);  //Crear Usuarios para Modul. Asistente
+   	case 2: Usuario_Valid(Arch_Usua,Clv);  //Crear Usuarios para Modul. Asistente
 		   break;
-		case 3:
+   	case 3: aten_vet(Arch_Veter);
 		   break;
-		case 4:
+   	case 4: Ranking(Arch_Veter);
 		   break;
    	
    }
    
 	}while(Opc!=5);
-	
-	
-	
-	void Ranking(FILE *Archi_Turns){
-	Return (FILE *Arch_Masc,atent_vet())
-	bool crearRank(){//ranking
-	FILE *veterinarios = fopen("veterinarios.dat");
-	Veterinario lectura;
-	int matriculas[100];
-	int cantidades [100];
-	c=0
-	
-	fread(&lectura,sizeof(veterinario),1,veterinarios);
-	while(!feof(veterinarios)){
-		matriculas[c] =lectura.Matricula;
-		cantidades[c] =aten_vet(turnos,lectura,matricula);
-		fread (&lectura, sizeof (veterinario), 1,veterinarios);
-	}
-	
-	
-	burbuja()}
-	
-	
-	
 	
 }
 
@@ -76,7 +55,10 @@ void reg_veter(FILE *Arch_Veter){
 	Veterinario vet;
 	
 	
+
 	Arch_Veter=fopen("Veterinarios.dat", "a+b");   //Apertura del Arch_Veter
+	
+	
 	
 	_flushall();
 	printf("Apellido y nombre del veterinario: ");
@@ -84,7 +66,9 @@ void reg_veter(FILE *Arch_Veter){
 	printf("DNI del Veterinario: ");
 	scanf("%d",&vet.DNI);
         printf("\nMatricula del Veterinario: ");
-        scanf("%f", &vet.Matricula);
+        scanf("%d", &vet.Matricula);
+        printf("\nIngresar Contraseña: ");
+        scanf("%s",&vet.contras);
         _flushall();
         printf("Telefono: ");
         gets(vet.Telefono);
@@ -157,6 +141,7 @@ void Usuario_Unic(FILE *Arch_Usua){
 	fclose(Arch_Usua);
 	
 }
+//Validacion de la ContraseÃ±a
 void password(FILE *usuario, cadena &password){
 	int Mayus,Minus,Num,Signos,NumConsecutivos,letrasCons;
 	bool Band = false;
@@ -216,30 +201,45 @@ void password(FILE *usuario, cadena &password){
 }
 
 
-printf("\nIngrese Matricula del Veterinario:");
-	    scanf("%d",&mat)	
-void aten_vet(*FILE Veterinarios){
+void Ranking(FILE *Arch_Veter){
+	 Arch_Veter=fopen("Veterinarios.dat","rb");
+	 Veterinario Lect;
+	 int Matricula[100];
+	 int Cantidades[100];
+	 int c=0;
+	 
+	 fread(&Lect, sizeof(Veterinario), 1,Arch_Veter);
+	 while(!feof(Arch_Veter)){
+	 	Matricula[c]=Lect.Matricula;
+	 	//Cantidades[c]=aten_vet(Arch_Veter,Lect.Matricula);
+	 }
+}
+	
+void aten_vet(FILE *Arch_Veter){
 	char a;
 	int b=0;
 	Turnos tur;
 	int mat;
+	int mes, anio;
 	
 	printf("\n                         Â°Â°ATENCION POR VETERINARIAÂ°Â°");
-	printf("****************************************************************************************")
+	printf("****************************************************************************************");
 	
 	do{
-		
-		fread(&a, sizeof(Turnos),1,Veterinarios);
-		while(!feof(Veterinarios)){
-			if(mat==tur.Matricula_de_Veterinario){
+		printf("\nIngrese Matricula del Veterinario:");
+	    scanf("%d",&mat);
+	    printf("\nIngrese mes y anio:");
+	    scanf("%d",&mes,&anio);
+	    
+		fread(&a, sizeof(Turnos),1,Arch_Veter);
+		while(!feof(Arch_Veter)){
+			if(mat==tur.Matricula_de_Veterinario && mes==tur.Fecha.mes && anio==tur.Fecha.anio ){
 				printf("\n\nMatricula del Veterinario: %d", tur.Matricula_de_Veterinario);
 				printf("\nDNI del duenio: %d", tur.DNI_Duenio);
 				printf("\nDetalles de la Atencion: %s ",tur.Detalle_de_Atencion);
 				b=1;
 			}
-			fread(&a, sizeof(Turnos),1,Veterinarios);
+			fread(&a, sizeof(Turnos), 1,Arch_Veter);
 		}
 	}while(b==0);
 }
-}
-
