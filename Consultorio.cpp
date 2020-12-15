@@ -57,6 +57,7 @@ bool Iniciar_Ses(FILE *Arch_Veter){
 	
 	Arch_Veter=fopen("Veterinarios.dat","rb");
 	printf("\nIngresar su Matricula: ");
+	_flushall();
     gets(Matr);
 	printf("\nIngresar clave: ");
 	gets(passAux);
