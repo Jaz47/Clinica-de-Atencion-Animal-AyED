@@ -31,11 +31,10 @@ main(){
    printf("\nIngresar Opcion: ");
    scanf("%d", & Opc);
    //system("cls");
-   
    switch(Opc){
    	case 1: Inicio=Iniciar_Ses(Arch_Veter);
    	        if(Inicio) printf("Inicio a sesion\n");
-   	        else printf("Error de Inicio\n");
+   	        else printf("Error de Inicio!!!! Matricula o Contrasenia ingresada incorrectamente!!!\n");
    	        break;
    	case 2: if(!Inicio) printf("\nDebe Iniciar Sesion para poder Continuar!!!!!!\n\n");
    	        
@@ -44,35 +43,31 @@ main(){
    	    break;
    	case 3: if(!Inicio) printf("\nDebe Iniciar Sesion para poder Continuar!!!!!!\n\n");
    	        else Iniciar_Ses(Arch_Veter);
-   	        Evoluc_masc(Arch_Turns);
+   	        //Evoluc_masc(Arch_Turns);
    	    break;
    }
    	}while(Opc!=4);
 }
+   
 //Inicio de Sesion
 bool Iniciar_Ses(FILE *Arch_Veter){
-	int Matr;
-	cadena pass;
+	cadena Matr;
+	cadena passAux;
 	Veterinario Vetr;
 	
 	Arch_Veter=fopen("Veterinarios.dat","rb");
-	printf("\nIngresar matricula: ");
-    scanf("%d",&Matr);
+	printf("\nIngresar su Matricula: ");
+    gets(Matr);
 	printf("\nIngresar clave: ");
-	gets(pass);
+	gets(passAux);
 	
 	rewind(Arch_Veter);
 	fread(&Vetr, sizeof(Vetr), 1,Arch_Veter);
 	while(!feof(Arch_Veter)){
-		if(Vetr.Matricula==Matr && strcmp(Vetr.contras,pass)==0){
-			printf("\nBienvenido al Consultorio");
+		if (strcmp(Vetr.Matricula,Matr)==0 && strcmp(Vetr.contr,passAux)==0){
+			fclose(Arch_Veter);
 			return true;
 		}
-		else{
-			printf("\nMatricula Incorrecta\n");
-			printf("Intentelo de Nuevo\n");
-		}
-		system("pause");
 	}
 	return false;
 	
