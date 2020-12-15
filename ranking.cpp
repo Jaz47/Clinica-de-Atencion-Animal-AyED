@@ -1,7 +1,7 @@
 # Clinica-de-Atencion-Animal-AyED
 #include<string>
 #include<stdio.h>
-//Archivos utilizados
+
 FILE *Arch_Veter;
 FILE *Arch_Usua;
 FILE *Arch_Turns;
