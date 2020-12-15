@@ -11,8 +11,7 @@ FILE *Arch_Masc;
 
 //Funciones Utilizadas
 void reg_veter(FILE *Arch_Veter);
-void Usuario_Valid(FILE *Arch_Usua, cadena &Contra);  //Contine la Carga y las coniciones
-void password(FILE *usuario, cadena &password);
+void reg_asis(FILE *Arch_Usua);
 void Ranking(FILE *Arch_Veter);
 void aten_vet(FILE *Arch_Veter);
 
@@ -33,171 +32,68 @@ main(){
    
    printf("\nIngresar Opcion: ");
    scanf("%d", &Opc);
-   
+		
    switch (Opc){
-   	case 1: reg_veter(Arch_Veter);  //Crear Usuarios para el Modul. de Consultorio
-		   break;
-   	case 2: Usuario_Valid(Arch_Usua,Clv);  //Crear Usuarios para Modul. Asistente
-		   break;
-   	case 3: aten_vet(Arch_Veter);
-		   break;
-   	case 4: Ranking(Arch_Veter);
-		   break;
-   	
+   	case 1: reg_veter(Arch_Veter);
+   		break;
+   	case 2:reg_asis(Arch_Usua);
+   		break;
+   	case 3:
+   		break;
+   	case 4:
+   	    break;
    }
    
 	}while(Opc!=5);
+ 
+}
+
+void reg_asis(FILE *Arch_Usua){
+	Usuarios u;
+	cadena passAux, userAux;
+	Arch_Usua=fopen("Usuarios.dat", "a+b");
 	
+	
+	printf("Apellido y nombre del Asistente: ");
+	scanf("%s", &u.usuario);
+    user(Arch_Usua,userAux);
+    strcpy(u.usuario, userAux);
+    
+    password(Arch_Usua,passAux);
+	strcpy(u.contras, passAux);	
+	fwrite(&u, sizeof(Usuarios),1,Arch_Usua);
+	fclose(Arch_Usua);
 }
 
 void reg_veter(FILE *Arch_Veter){
 	Veterinario vet;
+	cadena passAux, userAux;
+	Arch_Veter=fopen("Veterinarios.dat", "a+b");
 	
 	
-
-	Arch_Veter=fopen("Veterinarios.dat", "a+b");   //Apertura del Arch_Veter
-	
-	
-	
-	_flushall();
 	printf("Apellido y nombre del veterinario: ");
-	gets(vet.ApellidoyNombre);
-	printf("DNI del Veterinario: ");
-	scanf("%d",&vet.DNI);
-        printf("\nMatricula del Veterinario: ");
-        scanf("%d", &vet.Matricula);
-        printf("\nIngresar Contraseña: ");
-        scanf("%s",&vet.contras);
-        _flushall();
-        printf("Telefono: ");
-        gets(vet.Telefono);
+	scanf("%s", &vet.ApellidoyNombre);
 		
+	 printf("DNI del Veterinario: ");
+	 scanf("%d",&vet.DNI);
+	
+       printf("\nMatricula del Veterinario: ");
+       _flushall();
+       gets(vet.Matricula);
+    
+   
+    printf("Telefono: ");
+    scanf("%s", &vet.Telefono);
+    user(Arch_Veter,userAux);
+    strcpy(vet.Usuario,userAux);
+    
+    password(Arch_Veter,passAux);
+	strcpy(vet.contr, passAux);	
 	fwrite(&vet, sizeof(Veterinario),1,Arch_Veter);
 	fclose(Arch_Veter);
 }
 
-void Usuario_Valid(FILE *Arch_Usua, cadena &Contra){   //Validacion el Usuario
 
-	Usuarios Usuari;
-	int Long, Mays = 0, Cant_Nro = 0; //importante inicializar los contadores
-	bool bandera;
-	
-	
-	
-	Arch_Usua=fopen("Usuario.dat","a+b");
-	do{
-	printf("\nRegistrar usuario: ");
-	_flushall();
-	gets(Usuari.usuario);
-	
-	Long= strlen(Usuari.usuario);
-	
-	if(Long>5 && Long<11 && Usuari.usuario[0]>='a' && Usuari.usuario[0]<='z'){
-		for(int i=0; i<strlen(Usuari.usuario); i++){
-			if(Usuari.usuario[i]>='A' && Usuari.usuario[i]<='Z') Mays++;
-			else if(Usuari.usuario[i]>='0' && Usuari.usuario[i]<='9') Cant_Nro++;						
-		}		
-		if(Mays >= 2 && Cant_Nro<=3){
-			bandera= true;
-		    //printf("\nValido");
-		    if(bandera==true){
-		    	
-			}
-			
-		}
-		
-	}
-
-	if(bandera==false){
-		printf("\nEl usuario no cumple algunas de las condiciones\n");
-		printf("\nPOR FAVOR VUELVA A INTENTARLO..\n\n");
-	}
-}while(bandera==false); 
-
-}
-
-void Usuario_Unic(FILE *Arch_Usua){
-	Usuarios u;
-	Usuarios Usuario2;  //Nuevo usuario Ingresado
-	
-	Arch_Usua=fopen("Usuarios.dat","rb");  //Archivo abierto para lectura
-/*	printf("\nIngresar usuario: ");
-	_flushall();
-	gets(Usuario2.usuario);   //Usuario Nuevo, cargado ya
-	*/
-	rewind(Arch_Usua);
-	fread(&u, sizeof(Usuarios), 1,Arch_Usua);
-	while(!feof(Arch_Usua)){
-		if(strcmp(Usuario2.usuario,u.usuario)==0){
-			printf("\nUsuario ya existente");
-		}
-		else{
-			printf("\nUsuario Valido");
-			fwrite(&Usuario2, sizeof(Usuarios), 1,Arch_Usua);
-		}
-	}
-	
-	fclose(Arch_Usua);
-	
-}
-//Validacion de la ContraseÃ±a
-void password(FILE *usuario, cadena &password){
-	int Mayus,Minus,Num,Signos,NumConsecutivos,letrasCons;
-	bool bandera = false;
-	cadena passAux;
-	
-	do{
-		Mayus = 0, Minus = 0, Num = 0, Signos = 0, NumConsecutivos = 0, letrasCons = 1;
-		
-		printf("\nIngrese su contrasenia: ");
-		gets(passAux);
-		strcpy(password, passAux);
-
-		for(int i=0; i<strlen(passAux); i++)
-		{
-			if (passAux[i] >='A' && passAux[i] <='Z')
-			{
-			Mayus++;		
-			} 
-			else 
-			{
-				if (passAux[i] >='a' && passAux[i] <='z')
-				{
-				 Minus++;	
-				}
-				else
-				{
-					if (passAux[i] >= '0' && passAux[i] <= '9')
-					{
-						Num++;
-						NumConsecutivos++;
-					}
-					else
-					{
-						Signos++;
-					}
-				}
-	 		}
-		}
-		strlwr(passAux);
-		
-		for(int i=0; i<strlen(passAux); i++)
-		{
-			if (passAux[i] >= 'a' && passAux[i] <= 'z')
-			{
-			   if(i>0 && passAux[i-1]>'9' && passAux[i]==passAux[i-1] + 1)
-			   {
-			   		letrasCons++;
-			   } 			
-			}
-		}	
-		if (Mayus >= 1 && Minus >= 1 && Num >= 1 && Signos == 0 && letrasCons != 2 && NumConsecutivos <= 3)
-		{
-			bandera = true;
-		}	
-	}while(bandera == false);
-	 
-}
 
 
 void Ranking(FILE *Arch_Veter){
