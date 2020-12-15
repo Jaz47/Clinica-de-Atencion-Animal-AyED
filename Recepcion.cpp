@@ -54,26 +54,31 @@ main(){
 	}while (Opc != 5);
 }
 
-bool Iniciar_Ses(FILE *Arch_Usua){
-    Arch_Usua=fopen("Usuario.dat","rb");
-	Usuarios lect;
-	cadena nom,pass;
-	printf("Ingrese el nombre de Usuario: ");
-	_flushall();
-	gets(nom);
-	printf("Ingrese la contraseÃ±a del Usuario: ");
-	gets(pass);
+ bool Iniciar_Ses(FILE *Arch_Usua){
+	Arch_Usua=fopen("Usuarios.dat","rb");
 	
-	fread(&lect, sizeof(lect), 1,Arch_Usua);
+	Usuarios Lectr;
+	cadena userAux, passAux;
+	
+	printf("\nIngrese el Usuario: ");
+	_flushall();
+	gets(userAux);
+	printf("\nIngrese la Clave: ");
+	_flushall();
+	gets(passAux);
+	
+	fread(&Lectr, sizeof(Lectr), 1,Arch_Usua);
 	while(!feof(Arch_Usua)){
-		if (strcmp(lect.usuario,nom)==0
-		&& strcmp(lect.contras,pass)==0)
-		return true;
-			fread (&lect, sizeof(lect), 1,Arch_Usua);
+		if(strcmp(Lectr.usuario,userAux)==0 && strcmp(Lectr.contras,passAux)==0){
+			fclose(Arch_Usua);
+			return true;
+		}
+		fread(&Lectr, sizeof(Lectr), 1,Arch_Usua);
 	}
+	return false;
 
-	fclose(Arch_Usua);
 }
+
 
 void reg_mascota(FILE *Arch_Masc){
 	Mascota masc;
