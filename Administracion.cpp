@@ -12,7 +12,6 @@ FILE *Arch_Masc;
 //Funciones Utilizadas
 void reg_veter(FILE *Arch_Veter);
 void Usuario_Valid(FILE *Arch_Usua, cadena &Contra);  //Contine la Carga y las coniciones
-void Usuario_Unic(FILE *Arch_Usua);  // Compara el usuario que esta en la cargado en el archivo con un nuevo Usuario a Ingresar
 void password(FILE *usuario, cadena &password);
 void Ranking(FILE *Arch_Veter);
 void aten_vet(FILE *Arch_Veter);
@@ -84,7 +83,7 @@ void Usuario_Valid(FILE *Arch_Usua, cadena &Contra){   //Validacion el Usuario
 	bool bandera;
 	
 	
-	//aux=Contr_Valid(clave);
+	
 	Arch_Usua=fopen("Usuario.dat","a+b");
 	do{
 	printf("\nRegistrar usuario: ");
@@ -102,9 +101,9 @@ void Usuario_Valid(FILE *Arch_Usua, cadena &Contra){   //Validacion el Usuario
 			bandera= true;
 		    //printf("\nValido");
 		    if(bandera==true){
-		    	password(Arch_Usua,Contra);
+		    	
 			}
-			fwrite(&Usuari, sizeof(Usuarios), 1,Arch_Usua);  //Guardado de Usuarios Valido, para el modulo del Asistente
+			
 		}
 		
 	}
@@ -114,7 +113,7 @@ void Usuario_Valid(FILE *Arch_Usua, cadena &Contra){   //Validacion el Usuario
 		printf("\nPOR FAVOR VUELVA A INTENTARLO..\n\n");
 	}
 }while(bandera==false); 
-fclose(Arch_Usua);  //Cierre del del Arcj_Usua
+
 }
 
 void Usuario_Unic(FILE *Arch_Usua){
@@ -144,7 +143,7 @@ void Usuario_Unic(FILE *Arch_Usua){
 //Validacion de la ContraseÃ±a
 void password(FILE *usuario, cadena &password){
 	int Mayus,Minus,Num,Signos,NumConsecutivos,letrasCons;
-	bool Band = false;
+	bool bandera = false;
 	cadena passAux;
 	
 	do{
@@ -194,9 +193,9 @@ void password(FILE *usuario, cadena &password){
 		}	
 		if (Mayus >= 1 && Minus >= 1 && Num >= 1 && Signos == 0 && letrasCons != 2 && NumConsecutivos <= 3)
 		{
-			Band = true;
+			bandera = true;
 		}	
-	}while(Band == false);
+	}while(bandera == false);
 	 
 }
 
