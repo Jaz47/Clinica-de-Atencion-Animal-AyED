@@ -61,7 +61,7 @@ void reg_asis(FILE *Arch_Usua){
 	
 	
 	printf("Apellido y nombre del Asistente: ");
-	scanf("%s", &u.usuario);
+	scanf("%s", &u.ape_y_nomb);
 	_flushall();
     user(Arch_Usua,userAux);
     strcpy(u.usuario, userAux);
@@ -82,14 +82,14 @@ void reg_veter(FILE *Arch_Veter){
 	_flushall();
 	gets (vet.ApellidoyNombre);	
 	 printf("DNI del Veterinario: ");
-	 scanf("%i",&vet.DNI);
+	 scanf("%d",&vet.DNI);
 	 printf("Telefono: ");
 	 _flushall();
 	 gets(vet.Telefono);
 	
      printf("\nMatricula del Veterinario: ");
-     scanf("%i",&vet.Matric);
-    //_flushall();
+     scanf("%d",&vet.Matric);
+    
     password(Arch_Veter,passAux);
     printf("%d",vet.Matric);
 	strcpy(vet.contr, passAux);	
