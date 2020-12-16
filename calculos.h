@@ -68,6 +68,7 @@ void user(FILE *Arch_Usua, cadena &aux){
 	do{
 		int longitud, contadorMayus=0, contadorNum=0;
 		printf("\nIngrese su nombre de usuario: ");
+		_flushall();
 		gets(aux);
 		longitud = strlen(aux);
 		
@@ -111,6 +112,7 @@ void password(FILE *Arch_Usua, cadena &password){
 		Mayus = 0, Minus = 0, Num = 0, Signos = 0, NumConsecutivos = 0, letrasCons = 1;
 		
 		printf("\nIngrese su contrasenia: ");
+		_flushall();
 		gets(passAux);
 		strcpy(password, passAux);
 

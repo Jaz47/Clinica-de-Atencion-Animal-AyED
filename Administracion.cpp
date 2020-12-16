@@ -129,15 +129,14 @@ void Ranking(int mes, int anio){
 	
 int aten_vet(int mat, int mes, int anio){
 	int Cont=0;
-	Turnos tur;
-	
-	FILE *Arch_Turns=fopen("Turnos.dat","rb");
+	Turnos tur; 
+	FILE *Arch_Turns = fopen("Turnos.dat","rb");;
 	
 	printf("\n                         Ã‚Â°Ã‚Â°ATENCION POR VETERINARIAÃ‚Â°Ã‚Â°");
 	printf("****************************************************************************************");
-
+	
 	    
-		fread(&tur, sizeof(Turnos),1,Arch_Veter);
+		fread(&tur, sizeof(Turnos),1,Arch_Turns);
 		while(!feof(Arch_Turns)){
 			if(mat==tur.Matricula_de_Veterinario && mes==tur.Fecha.mes && anio==tur.Fecha.anio ){
 				printf("\n\nMatricula del Veterinario: %d", tur.Matricula_de_Veterinario);
@@ -146,9 +145,8 @@ int aten_vet(int mat, int mes, int anio){
 				Cont++;
 		
 			}
-			fread(&tur, sizeof(Turnos), 1,Arch_Veter);
+			fread(&tur, sizeof(Turnos), 1, Arch_Turns);
 		}
-		fclose(Arch_Turns);
-		return Cont;
-
+	fclose(Arch_Turns);
+ 	return Cont;
 }
