@@ -32,7 +32,7 @@ struct Usuarios{
 
 struct Veterinario{
     cadena ApellidoyNombre;
-    int Matricula; 
+    cadena Matricula; 
     int DNI;
     cadena Telefono;
     cadena Usuario;
