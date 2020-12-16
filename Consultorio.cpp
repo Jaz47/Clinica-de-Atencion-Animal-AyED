@@ -75,7 +75,7 @@ bool Iniciar_Ses(FILE *Arch_Veter){
 	
 }
 
-void list_turnos(FILE *Arch_Turns){  //Falta Corregir detalles
+void list_turnos(FILE *Arch_Turns){  
 	Turnos Turns;
 	Mascota Masct;
 	int dia,Mes,Anio, Matric;   
@@ -90,22 +90,19 @@ void list_turnos(FILE *Arch_Turns){  //Falta Corregir detalles
 	scanf("%d/%d/%d",&dia,&Mes,&Anio);
 	printf("\nIngresar Matricula del veterinario: ");
 	scanf("%d",&Matric);
-	printf("\nLA LISTA DE ESPERA ES\n");
-	fread(&Turns, sizeof(Turnos), 1,Arch_Turns);
+	printf("\nLA LISTA DE ESPERA ES:\n");
+	rewind(Arch_Turns);
 	while(!feof(Arch_Turns)){  //Mientras no sea final de archivo
 	if(Matric==Turns.Matricula_de_Veterinario && dia==Turns.Fecha.dia && Mes==Turns.Fecha.mes && Anio==Turns.Fecha.anio){
 		printf("\nDomicilio de la mascota: %s",Masct.Domicilio);
-	    printf("\nDNI DueÃ±o: %d",Masct.DNI_Duenio);
-	    printf("\nPeso de la Mascota: %.2f",Masct.Peso);
-	    printf("\n\n");
-	    system("pause");
+	    printf("\nDNI Duenioo: %d",Masct.DNI_Duenio);
+	    printf("\nPeso de la Mascota: %f\n\n",Masct.Peso);
+	    }  
+	fread(&Turns, sizeof(Turnos), 1,Arch_Turns);  
+    fread(&Masct, sizeof(Mascota), 1,Arch_Masc);
 	}
-	fread(&Masct, sizeof(Mascota), 1,Arch_Masc);
-	}
-	printf("\n\n");
 	fclose(Arch_Turns);
-	system("pause");
-	
+	fclose(Arch_Masc);
 }
 	
 void Evoluc_masc(FILE *Arch_Turns){
