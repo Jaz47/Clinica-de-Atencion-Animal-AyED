@@ -19,7 +19,7 @@ main(){
 	
 	do{
   printf("\t-----------------------------------------------\n");
-  printf("\t|      *Modulo de Asistente*                |\n");
+  printf("\t|      *Modulo de Asistente*                  |\n");
   printf("\t| 1-> Iniciar Sesion                          |\n");
   printf("\t| 2-> Registrar Mascota                       |\n");
   printf("\t| 3-> Registrar Turnos                        |\n");
@@ -32,8 +32,8 @@ main(){
    
    switch (Opc){
    	case 1: Inicio=Iniciar_Ses(Arch_Usua); 
-	    	if (Inicio) printf("BIENVENIDO!!!\n");
-	    	else printf("ERROR en inicio de sesion. VUELVA A INTENTARLO!!!\n");
+	    	if (Inicio) printf("\nBIENVENIDO!!!\n\n");
+	    	else printf("\nERROR en inicio de sesion. VUELVA A INTENTARLO!!!\n\n");
    		break;
    		
    	case 2: if (!Inicio) printf("Inicie sesion para continuar\n");
@@ -109,7 +109,7 @@ void reg_mascota(FILE *Arch_Masc){
     scanf("%.2f", &masc.Peso);
     
     _flushall();
-    printf("\nTelefono del DueÃƒÂ±o: ");
+    printf("\nTelefono del DueÃƒÆ’Ã‚Â±o: ");
     gets(masc.Telefono);
 		
 	fwrite(&masc, sizeof(Mascota),1,Arch_Masc);
@@ -131,8 +131,8 @@ void Reg_Turns(FILE *Arch_Veter){
 	fread(&vet, sizeof(Veterinario),1,Arch_Veter);
 	
 	while(!feof(Arch_Veter)){
-		if(mat==vet.Matricula){
-			turn.Matricula_de_Veterinario=vet.Matricula;
+		if(mat==vet.Matric){
+			//turn.Matricula_de_Veterinario=vet.Matricula;
 			printf("\nDni del duenio de la mascota: ");
 			scanf("%d", &turn.DNI_Duenio);
 			
@@ -164,7 +164,7 @@ void listVetFecha(FILE *Arch_Veter){
 	scanf("%d", &d);
 	printf("Ingresar  mes de atencion que desea buscar: ");
 	scanf("%d", &m);
-	printf("Ingresar aÃƒÂ±o de atencion que desea buscar: ");
+	printf("Ingresar aÃƒÆ’Ã‚Â±o de atencion que desea buscar: ");
 	scanf("%d", &a);
 	
 	printf("\nIngresar Matricula del Veterinario que desea buscar: ");
@@ -176,7 +176,7 @@ void listVetFecha(FILE *Arch_Veter){
 	
 	
 	while(!feof(Arch_Veter)){
-		if(mat==vet.Matricula){
+		if(mat==vet.Matric){
 			while(!feof(Arch_Turns)){
 				if (d==tur.Fecha.dia){
 					while(!feof(Arch_Turns)){
@@ -184,7 +184,7 @@ void listVetFecha(FILE *Arch_Veter){
 							while(!feof(Arch_Turns)){
 								if (a==tur.Fecha.anio){
 									printf("\nMatricula del Veterinario a cargo: ");
-									scanf("%d",&vet.Matricula);
+									scanf("%d",&vet.Matric);
 									printf("\nFecha de la consulta:");
 									printf("\nDia/ Mes/ Anio: %d/ %d/ %d",tur.Fecha.dia,tur.Fecha.mes,tur.Fecha.anio );
 								}
