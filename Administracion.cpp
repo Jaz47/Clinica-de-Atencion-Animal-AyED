@@ -114,6 +114,11 @@ void Ranking(int mes, int anio){
 	 	Matricula[c]=Lect.Matric;
 	 	Cantidades[c]=aten_vet(Lect.Matric, mes, anio);
 	 }
+	system("cls");
+	 for(int i =0; i<c;i++){
+	 	printf("-> %d: %d\n", Matricula[i], Cantidades[i]);
+	 }
+	 system("pause");
 	 
 	 fclose(Arch_Veter);
 }
