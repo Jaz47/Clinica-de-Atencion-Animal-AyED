@@ -37,13 +37,12 @@ main(){
    	        else printf("\nError de Inicio!!!! Matricula o Contrasenia ingresada incorrectamente!!!\n\n");
    	        break;
    	case 2: if(!Inicio) printf("\nDebe Iniciar Sesion para poder Continuar!!!!!!\n\n");
-   	        
-   	        else Iniciar_Ses(Arch_Veter);
-   	          list_turnos(Arch_Turns);
+   	        else list_turnos(Arch_Turns);
+   	          
    	    break;
    	case 3: if(!Inicio) printf("\nDebe Iniciar Sesion para poder Continuar!!!!!!\n\n");
-   	        else Iniciar_Ses(Arch_Veter);
-   	        //Evoluc_masc(Arch_Turns);
+   	        else Evoluc_masc(Arch_Turns);
+   	        
    	    break;
    }
    	}while(Opc!=4);
@@ -84,7 +83,7 @@ void list_turnos(FILE *Arch_Turns){  //Falta Corregir detalles
 	Arch_Turns=fopen("Turnos.dat","rb");
 	Arch_Masc=fopen("Mascotas.dat","rb");
 	if(Arch_Turns==NULL){
-		printf("\n\tÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡EROOR!.. El Archivo no Pudo Abrirse");
+		printf("\n\t¡EROOR!.. El Archivo no Pudo Abrirse");
 		exit(1);
 	}
 	printf("\nIngresar fecha para mostrar sus respectivos turnos: ");
@@ -94,15 +93,18 @@ void list_turnos(FILE *Arch_Turns){  //Falta Corregir detalles
 	printf("\nLA LISTA DE ESPERA ES\n");
 	fread(&Turns, sizeof(Turnos), 1,Arch_Turns);
 	while(!feof(Arch_Turns)){  //Mientras no sea final de archivo
-	if(Matric=Turns.Matricula_de_Veterinario && dia==Turns.Fecha.dia && Mes==Turns.Fecha.mes && Anio==Turns.Fecha.anio)
-	printf("\nDomicilio de la mascota: %s",Masct.Domicilio);
-	printf("\nDNI DueÃ±o: %d",Masct.DNI_Duenio);
-	printf("\nPeso de la Mascota: %.2f",Masct.Peso);
-	printf("\n\n");
-		fread(&Masct, sizeof(Mascota), 1,Arch_Masc);
+	if(Matric==Turns.Matricula_de_Veterinario && dia==Turns.Fecha.dia && Mes==Turns.Fecha.mes && Anio==Turns.Fecha.anio){
+		printf("\nDomicilio de la mascota: %s",Masct.Domicilio);
+	    printf("\nDNI DueÃ±o: %d",Masct.DNI_Duenio);
+	    printf("\nPeso de la Mascota: %.2f",Masct.Peso);
+	    printf("\n\n");
+	    system("pause");
+	}
+	fread(&Masct, sizeof(Mascota), 1,Arch_Masc);
 	}
 	printf("\n\n");
 	fclose(Arch_Turns);
+	system("pause");
 	
 }
 	
