@@ -21,7 +21,7 @@ main(){
 	
 	do{
 		printf("\t------------------------------------------------------\n");
-         printf("\t|      **Modulo de Consultorio Veterinario**            |\n");
+         printf("\t|      **Modulo de Consultorio Veterinario**         |\n");
          printf("\t| 1-> Iniciar Sesion                                 |\n");
          printf("\t| 2-> Visualizar Lista de Espera de Turnos (Informes)|\n");   // Mostrar los turnos de la fecha, osea cuantos registros hay para esa fecha
          printf("\t| 3-> Registrar Evolucion de la Mascota              |\n");  //Baja Logica
@@ -33,8 +33,8 @@ main(){
    //system("cls");
    switch(Opc){
    	case 1: Inicio=Iniciar_Ses(Arch_Veter);
-   	        if(Inicio) printf("BIENVENIDO!!!\n");
-   	        else printf("Error de Inicio!!!! Matricula o Contrasenia ingresada incorrectamente!!!\n");
+   	        if(Inicio) printf("\nBIENVENIDO!!!\n\n");
+   	        else printf("\nError de Inicio!!!! Matricula o Contrasenia ingresada incorrectamente!!!\n\n");
    	        break;
    	case 2: if(!Inicio) printf("\nDebe Iniciar Sesion para poder Continuar!!!!!!\n\n");
    	        
@@ -51,25 +51,25 @@ main(){
    
 //Inicio de Sesion
 bool Iniciar_Ses(FILE *Arch_Veter){
-	cadena Matr;
+	int Matr;
 	cadena passAux;
-	Veterinario Vetr;
+	Veterinario Lect;
 	
 	Arch_Veter=fopen("Veterinarios.dat","rb");
 	printf("\nIngresar su Matricula: ");
-	_flushall();
-    gets(Matr);
+	scanf("%d",&Matr);
 	printf("\nIngresar clave: ");
+	_flushall();
 	gets(passAux);
 	
 	rewind(Arch_Veter);
-	fread(&Vetr, sizeof(Vetr), 1,Arch_Veter);
+	fread(&Lect, sizeof(Lect), 1,Arch_Veter);
 	while(!feof(Arch_Veter)){
-		if (strcmp(Vetr.Matricula,Matr)==0 && strcmp(Vetr.contr,passAux)==0){
+		if (Lect.Matric == Matr && strcmp(Lect.contr,passAux)==0){
 			fclose(Arch_Veter);
 			return true;
 		}
-		fread(&Vetr, sizeof(Vetr), 1,Arch_Veter);
+		fread(&Lect, sizeof(Lect), 1,Arch_Veter);
 	}
 	return false;
 	
@@ -84,7 +84,7 @@ void list_turnos(FILE *Arch_Turns){  //Falta Corregir detalles
 	Arch_Turns=fopen("Turnos.dat","rb");
 	Arch_Masc=fopen("Mascotas.dat","rb");
 	if(Arch_Turns==NULL){
-		printf("\n\tÃƒâ€šÃ‚Â¡EROOR!.. El Archivo no Pudo Abrirse");
+		printf("\n\tÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡EROOR!.. El Archivo no Pudo Abrirse");
 		exit(1);
 	}
 	printf("\nIngresar fecha para mostrar sus respectivos turnos: ");
@@ -96,7 +96,7 @@ void list_turnos(FILE *Arch_Turns){  //Falta Corregir detalles
 	while(!feof(Arch_Turns)){  //Mientras no sea final de archivo
 	if(Matric=Turns.Matricula_de_Veterinario && dia==Turns.Fecha.dia && Mes==Turns.Fecha.mes && Anio==Turns.Fecha.anio)
 	printf("\nDomicilio de la mascota: %s",Masct.Domicilio);
-	printf("\nDNI Dueño: %d",Masct.DNI_Duenio);
+	printf("\nDNI DueÃ±o: %d",Masct.DNI_Duenio);
 	printf("\nPeso de la Mascota: %.2f",Masct.Peso);
 	printf("\n\n");
 		fread(&Masct, sizeof(Mascota), 1,Arch_Masc);
@@ -148,4 +148,3 @@ void Evoluc_masc(FILE *Arch_Turns){
 	}
 	fclose(Arch_Turns);
 }
-
