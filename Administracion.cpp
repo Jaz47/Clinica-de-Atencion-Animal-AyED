@@ -9,14 +9,14 @@ FILE *Arch_Usua;
 FILE *Arch_Turns;
 FILE *Arch_Masc;
 
-//Funciones Utilizadas
+//Prototipos Utilizadas
 void reg_veter(FILE *Arch_Veter);
 void reg_asis(FILE *Arch_Usua);
-void Ranking(FILE *Arch_Veter);
-void aten_vet(FILE *Arch_Veter);
+void Ranking(int mes, int anio);
+int aten_vet(int mat, int mes, int anio);
 
 main(){
-	
+	int Mes, Anio, matrc;
 	int Opc;
 	cadena Clv;
 	do{
@@ -36,11 +36,17 @@ main(){
    switch (Opc){
    	case 1: reg_veter(Arch_Veter);
    		break;
-   	case 2:reg_asis(Arch_Usua);
+		   
+   	case 2: reg_asis(Arch_Usua);
    		break;
-   	case 3:
+		   
+   	case 3: printf("\nIngrese la Matricula del Veterinario: ");
+   	        scanf("%d",&matrc);
    		break;
-   	case 4:
+		   	   
+   	case 4: printf("\nIngresar Mes y Anño");
+   	        scanf("%d/%d",&Mes,&Anio);
+   	        Ranking(Mes,Anio);
    	    break;
    }
    
@@ -56,6 +62,7 @@ void reg_asis(FILE *Arch_Usua){
 	
 	printf("Apellido y nombre del Asistente: ");
 	scanf("%s", &u.usuario);
+	_flushall();
     user(Arch_Usua,userAux);
     strcpy(u.usuario, userAux);
     
@@ -81,9 +88,8 @@ void reg_veter(FILE *Arch_Veter){
 	 gets(vet.Telefono);
 	
      printf("\nMatricula del Veterinario: ");
-     _flushall();
-     gets(vet.Matricula);
-    
+     scanf("%d",&vet.Matric);
+    _flushall();
     password(Arch_Veter,passAux);
 	strcpy(vet.contr, passAux);	
 	fwrite(&vet, sizeof(Veterinario),1,Arch_Veter);
@@ -94,8 +100,8 @@ void reg_veter(FILE *Arch_Veter){
 
 
 
-void Ranking(FILE *Arch_Veter){
-	 Arch_Veter=fopen("Veterinarios.dat","rb");
+void Ranking(int mes, int anio){
+	 FILE *Arch_Veter=fopen("Veterinarios.dat","rb");
 	 Veterinario Lect;
 	 int Matricula[100];
 	 int Cantidades[100];
@@ -103,36 +109,36 @@ void Ranking(FILE *Arch_Veter){
 	 
 	 fread(&Lect, sizeof(Veterinario), 1,Arch_Veter);
 	 while(!feof(Arch_Veter)){
-	 	Matricula[c]=Lect.Matricula;
-	 	//Cantidades[c]=aten_vet(Arch_Veter,Lect.Matricula);
+	 	Matricula[c]=Lect.Matric;
+	 	Cantidades[c]=aten_vet(Lect.Matric, mes, anio);
 	 }
+	 
+	 fclose(Arch_Veter);
 }
 	
-void aten_vet(FILE *Arch_Veter){
-	char a;
-	int b=0;
+int aten_vet(int mat, int mes, int anio){
+	int Cont=0;
 	Turnos tur;
-	int mat;
-	int mes, anio;
 	
-	printf("\n                         Â°Â°ATENCION POR VETERINARIAÂ°Â°");
+	printf("\n                         Ã‚Â°Ã‚Â°ATENCION POR VETERINARIAÃ‚Â°Ã‚Â°");
 	printf("****************************************************************************************");
 	
-	do{
+	
 		printf("\nIngrese Matricula del Veterinario:");
 	    scanf("%d",&mat);
 	    printf("\nIngrese mes y anio:");
 	    scanf("%d",&mes,&anio);
 	    
-		fread(&a, sizeof(Turnos),1,Arch_Veter);
+		fread(&tur, sizeof(Turnos),1,Arch_Veter);
 		while(!feof(Arch_Veter)){
 			if(mat==tur.Matricula_de_Veterinario && mes==tur.Fecha.mes && anio==tur.Fecha.anio ){
 				printf("\n\nMatricula del Veterinario: %d", tur.Matricula_de_Veterinario);
 				printf("\nDNI del duenio: %d", tur.DNI_Duenio);
 				printf("\nDetalles de la Atencion: %s ",tur.Detalle_de_Atencion);
-				b=1;
+				Cont++;
+		
 			}
-			fread(&a, sizeof(Turnos), 1,Arch_Veter);
+			fread(&tur, sizeof(Turnos), 1,Arch_Veter);
 		}
-	}while(b==0);
+
 }
