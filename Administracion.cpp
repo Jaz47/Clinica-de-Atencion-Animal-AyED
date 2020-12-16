@@ -63,13 +63,13 @@ void reg_asis(FILE *Arch_Usua){
 	printf("Apellido y nombre del Asistente: ");
 	scanf("%s", &u.ape_y_nomb);
 	printf("\n// AVISOO!! PARA CREAR SU USUARIO DEBE CUMPLIR LOS SIG REQUISITOS:\n");
-	printf("-Cantidad minima de 6 caracteres y maxima de 10 \n-Pueden ser letras, numeros y/o simbolos del conjunto {+,-,/,*,?,Â¿,!,Â¡}.");
+	printf("-Cantidad minima de 6 caracteres y maxima de 10 \n-Pueden ser letras, numeros y/o simbolos del conjunto {+,-,/,*,?,Ã‚Â¿,!,Ã‚Â¡}.");
 	printf("\n-Comenzar con una letra minuscula.\n-Tener al menos 2 letras mayusculas.\nTener como maximo 3 digitos\n \n--EJEMPLO: mARtin12\n\n");
 	_flushall();
     user(Arch_Usua,userAux);
     strcpy(u.usuario, userAux);
    	printf("\n// AVISOO!! PARA CREAR SU CLAVE DEBE CUMPLIR LOS SIG REQUISITOS:\n");
-    printf("-Debera contener al menos una letra mayuscula, una letra minscula y un nmero.\n-No podra contener ningun caracter de puntuacion, ni acentos, ni espacios. Solo caracteres alfanumÃ©ricos.\n -DeberÃ¡ tener entre 6 y 32 caracteres.\n-No debe tener mas de 3 caracteres numericos consecutivos.\n-No debe tener 2 caracteres consecutivos que refieran a letras alfabÃ©ticamente consecutivas (ascendentemente). Este criterio es valido tanto para letras mayusculas, minusculas o combinacion de ambas\n \n--EJEMPLO: Achus32\n");
+    printf("-Debera contener al menos una letra mayuscula, una letra minscula y un nmero.\n-No podra contener ningun caracter de puntuacion, ni acentos, ni espacios. Solo caracteres alfanumÃƒÂ©ricos.\n -DeberÃƒÂ¡ tener entre 6 y 32 caracteres.\n-No debe tener mas de 3 caracteres numericos consecutivos.\n-No debe tener 2 caracteres consecutivos que refieran a letras alfabÃƒÂ©ticamente consecutivas (ascendentemente). Este criterio es valido tanto para letras mayusculas, minusculas o combinacion de ambas\n \n--EJEMPLO: Achus32\n");
     password(Arch_Usua,passAux);
 	strcpy(u.contras, passAux);	
 	fwrite(&u, sizeof(Usuarios),1,Arch_Usua);
@@ -113,17 +113,20 @@ void Ranking(int mes, int anio){
 	 int Cantidades[100];
 	 int c=0;
 	 
-	 fread(&Lect, sizeof(Veterinario), 1,Arch_Veter);
+	 fread(&Lect, sizeof(Veterinario), 1, Arch_Veter);
 	 while(!feof(Arch_Veter)){
 	 	Matricula[c]=Lect.Matric;
 	 	Cantidades[c]=aten_vet(Lect.Matric, mes, anio);
+	 	c++;
+	 	fread(&Lect, sizeof(Veterinario), 1, Arch_Veter);
 	 }
-	system("cls");
-	 for(int i =0; i<c;i++){
-	 	printf("-> %d: %d\n", Matricula[i], Cantidades[i]);
+	 system("cls");
+	
+	 
+	 for(int i=0; i<c; i++){
+	 	printf(" -> %d : %d\n", Matricula[i], Cantidades[i]);
 	 }
 	 system("pause");
-	 
 	 fclose(Arch_Veter);
 }
 	
@@ -132,7 +135,7 @@ int aten_vet(int mat, int mes, int anio){
 	Turnos tur; 
 	FILE *Arch_Turns = fopen("Turnos.dat","rb");;
 	
-	printf("\n                   °ATENCION POR VETERINARIA°");
+	printf("\n                   Â°ATENCION POR VETERINARIAÂ°");
 	printf("****************************************************************************************");
 	
 	    
