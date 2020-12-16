@@ -168,7 +168,6 @@ void Reg_Turns(FILE *Arch_Veter){
 	fclose(Arch_Turns);
 	
 }
-
 void listVetFecha(FILE *Arch_Veter){
 	int d,m,a,mat;
 	Turnos tur;
@@ -176,14 +175,14 @@ void listVetFecha(FILE *Arch_Veter){
 	fecha fec;
 	
 	
-	printf("Ingresar dia de atencion que desea buscar: ");
+	printf("Ingresar dia de atencion : ");
 	scanf("%d", &d);
-	printf("Ingresar  mes de atencion que desea buscar: ");
+	printf("Ingresar  mes de atencion : ");
 	scanf("%d", &m);
-	printf("Ingresar Anio de atencion que desea buscar: ");
+	printf("Ingresar Anio de atencion: ");
 	scanf("%d", &a);
 	
-	printf("\nIngresar Matricula del Veterinario que desea buscar: ");
+	printf("\nIngresar Matricula del Veterinario: ");
 	scanf("%d", &mat);
 	
 	Arch_Turns=fopen("Turnos.dat", "r+b");
@@ -200,9 +199,9 @@ void listVetFecha(FILE *Arch_Veter){
 							while(!feof(Arch_Turns)){
 								if (a==tur.Fecha.anio){
 									printf("\nMatricula del Veterinario a cargo: ");
-									scanf("%d",&vet.Matric);
+									printf("%d",mat);
 									printf("\nFecha de la consulta:");
-									printf("\nDia/ Mes/ Anio: %d/ %d/ %d",tur.Fecha.dia,tur.Fecha.mes,tur.Fecha.anio );
+									printf("\nDia/ Mes/ Anio: %d/ %d/ %d\n\n",tur.Fecha.dia,tur.Fecha.mes,tur.Fecha.anio );
 								}
 								fread(&tur,sizeof(Turnos),1,Arch_Turns);
 							}
