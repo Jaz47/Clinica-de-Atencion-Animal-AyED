@@ -63,13 +63,13 @@ void reg_asis(FILE *Arch_Usua){
 	printf("Apellido y nombre del Asistente: ");
 	scanf("%s", &u.ape_y_nomb);
 	printf("\n// AVISOO!! PARA CREAR SU USUARIO DEBE CUMPLIR LOS SIG REQUISITOS:\n");
-	printf("-Cantidad minima de 6 caracteres y maxima de 10 \n-Pueden ser letras, numeros y/o simbolos del conjunto {+,-,/,*,?,¿,!,¡}.");
+	printf("-Cantidad minima de 6 caracteres y maxima de 10 \n-Pueden ser letras, numeros y/o simbolos del conjunto {+,-,/,*,?,Â¿,!,Â¡}.");
 	printf("\n-Comenzar con una letra minuscula.\n-Tener al menos 2 letras mayusculas.\nTener como maximo 3 digitos\n \n--EJEMPLO: mARtin12\n\n");
 	_flushall();
     user(Arch_Usua,userAux);
     strcpy(u.usuario, userAux);
    	printf("\n// AVISOO!! PARA CREAR SU CLAVE DEBE CUMPLIR LOS SIG REQUISITOS:\n");
-    printf("-Debera contener al menos una letra mayuscula, una letra minscula y un nmero.\n-No podra contener ningun caracter de puntuacion, ni acentos, ni espacios. Solo caracteres alfanuméricos.\n -Deberá tener entre 6 y 32 caracteres.\n-No debe tener mas de 3 caracteres numericos consecutivos.\n-No debe tener 2 caracteres consecutivos que refieran a letras alfabéticamente consecutivas (ascendentemente). Este criterio es valido tanto para letras mayusculas, minusculas o combinacion de ambas\n \n--EJEMPLO: Achus32\n");
+    printf("-Debera contener al menos una letra mayuscula, una letra minscula y un nmero.\n-No podra contener ningun caracter de puntuacion, ni acentos, ni espacios. Solo caracteres alfanumÃ©ricos.\n -DeberÃ¡ tener entre 6 y 32 caracteres.\n-No debe tener mas de 3 caracteres numericos consecutivos.\n-No debe tener 2 caracteres consecutivos que refieran a letras alfabÃ©ticamente consecutivas (ascendentemente). Este criterio es valido tanto para letras mayusculas, minusculas o combinacion de ambas\n \n--EJEMPLO: Achus32\n");
     password(Arch_Usua,passAux);
 	strcpy(u.contras, passAux);	
 	fwrite(&u, sizeof(Usuarios),1,Arch_Usua);
@@ -132,7 +132,7 @@ int aten_vet(int mat, int mes, int anio){
 	Turnos tur; 
 	FILE *Arch_Turns = fopen("Turnos.dat","rb");;
 	
-	printf("\n                         Ã‚Â°Ã‚Â°ATENCION POR VETERINARIAÃ‚Â°Ã‚Â°");
+	printf("\n                   °ATENCION POR VETERINARIA°");
 	printf("****************************************************************************************");
 	
 	    
@@ -141,7 +141,7 @@ int aten_vet(int mat, int mes, int anio){
 			if(mat==tur.Matricula_de_Veterinario && mes==tur.Fecha.mes && anio==tur.Fecha.anio ){
 				printf("\n\nMatricula del Veterinario: %d", tur.Matricula_de_Veterinario);
 				printf("\nDNI del duenio: %d", tur.DNI_Duenio);
-				printf("\nDetalles de la Atencion: %s ",tur.Detalle_de_Atencion);
+				printf("\nDetalles de la Atencion: %s \n\n",tur.Detalle_de_Atencion);
 				Cont++;
 		
 			}
