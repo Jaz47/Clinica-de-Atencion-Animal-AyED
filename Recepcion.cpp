@@ -37,18 +37,18 @@ main(){
    		break;
    		
    	case 2: if (!Inicio) printf("Inicie sesion para continuar\n");
-			else Iniciar_Ses(Arch_Usua);
-			reg_mascota(Arch_Masc);
+			else reg_mascota(Arch_Masc);
+			
    		break;
    	
    	case 3: if (!Inicio) printf("Inicie sesion para continuar\n");
-			else Iniciar_Ses(Arch_Usua);
-			Reg_Turns(Arch_Turns);
+			else Reg_Turns(Arch_Turns);
+			
    		 	break;
    		
    	case 4:if (!Inicio) printf("Inicie sesion para continuar\n");
-			else Iniciar_Ses(Arch_Usua);
-			listVetFecha(Arch_Veter);
+			else listVetFecha(Arch_Veter);
+			
 			break;
    }
 	}while (Opc != 5);
