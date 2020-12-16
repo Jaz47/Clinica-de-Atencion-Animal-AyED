@@ -72,18 +72,20 @@ void reg_veter(FILE *Arch_Veter){
 	
 	
 	printf("Apellido y nombre del veterinario: ");
-	scanf("%s", &vet.ApellidoyNombre);
-	_flushall();	
+	_flushall();
+	gets(vet.ApellidoyNombre);
+	
+		
 	 printf("DNI del Veterinario: ");
 	 scanf("%d",&vet.DNI);
 	
        printf("\nMatricula del Veterinario: ");
-       _flushall();
-       gets(vet.Matricula);
+       scanf("%d",&vet.Matricula);
     
-   
     printf("Telefono: ");
-    scanf("%s", &vet.Telefono);
+    _flushall();
+    gets(vet.Telefono);
+	
     user(Arch_Veter,userAux);
     strcpy(vet.Usuario,userAux);
     
