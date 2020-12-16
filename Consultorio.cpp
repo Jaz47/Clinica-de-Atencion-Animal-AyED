@@ -33,7 +33,7 @@ main(){
    //system("cls");
    switch(Opc){
    	case 1: Inicio=Iniciar_Ses(Arch_Veter);
-   	        if(Inicio) printf("Inicio a sesion\n");
+   	        if(Inicio) printf("BIENVENIDO!!!\n");
    	        else printf("Error de Inicio!!!! Matricula o Contrasenia ingresada incorrectamente!!!\n");
    	        break;
    	case 2: if(!Inicio) printf("\nDebe Iniciar Sesion para poder Continuar!!!!!!\n\n");
@@ -69,6 +69,7 @@ bool Iniciar_Ses(FILE *Arch_Veter){
 			fclose(Arch_Veter);
 			return true;
 		}
+		fread(&Vetr, sizeof(Vetr), 1,Arch_Veter);
 	}
 	return false;
 	
