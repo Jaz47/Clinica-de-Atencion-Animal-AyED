@@ -32,7 +32,7 @@ struct Usuarios{
 
 struct Veterinario{
     cadena ApellidoyNombre;
-    cadena Matricula; 
+    int Matric; 
     int DNI;
     cadena Telefono;
     cadena Usuario;
@@ -159,5 +159,4 @@ void password(FILE *Arch_Usua, cadena &password){
 	}while(Band == false);
 	 
 }
-
 
