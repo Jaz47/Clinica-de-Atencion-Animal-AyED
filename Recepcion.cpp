@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include"calculos.h"
-
+//cambios
 //Archivos utilizados
 FILE *Arch_Veter;
 FILE *Arch_Usua;
@@ -56,6 +56,10 @@ main(){
 
  bool Iniciar_Ses(FILE *Arch_Usua){
 	Arch_Usua=fopen("Usuarios.dat","rb");
+	if(Arch_Usua==NULL){
+		printf("\nEl archivo no existe!\n");
+		exit(1);
+	}
 	
 	Usuarios Lectr;
 	cadena userAux, passAux;
@@ -126,22 +130,34 @@ void Reg_Turns(FILE *Arch_Veter){
 	printf("Ingresar las Matricula del Veterinario: ");
 	scanf("%d", &mat);
 	Arch_Turns=fopen("Turnos.dat","a+b");
+	if(Arch_Turns==NULL){
+		printf("\nEl archivo no existe!\n");
+		exit(1);
+	}
 	
 	Arch_Veter=fopen("Veterinarios.dat", "rb");
+	if(Arch_Veter==NULL){
+		printf("\nEl archivo no existe!\n");
+		exit(1);
+	}
 	fread(&vet, sizeof(Veterinario),1,Arch_Veter);
 	
-	while(!feof(Arch_Veter)){
+	while(!feof(Arch_Veter) && !b){
 		if(mat==vet.Matric){
 			//turn.Matricula_de_Veterinario=vet.Matricula;
 			printf("\nDni del duenio de la mascota: ");
 			scanf("%d", &turn.DNI_Duenio);
 			
 			printf("/n Fecha del Turno (dia/mes/anio): ");
-			scanf("%d/%d%d", &turn.Fecha.dia,turn.Fecha.mes,turn.Fecha.anio);
-			
+			scanf("%d/%d/%d", &turn.Fecha.dia, &turn.Fecha.mes, &turn.Fecha.anio);
+			turn.Matricula_de_Veterinario=mat;
+			turn.borrado=false;
+			strcpy(turn.Detalle_de_Atencion, "");
 			
 			fwrite(&turn, sizeof(Turnos),1,Arch_Turns);
 			b=true;
+			printf("\nTurno Guardado\n");
+			system("pause");
 		}
 		fread(&vet, sizeof(Veterinario),1,Arch_Veter);
 	}
@@ -164,7 +180,7 @@ void listVetFecha(FILE *Arch_Veter){
 	scanf("%d", &d);
 	printf("Ingresar  mes de atencion que desea buscar: ");
 	scanf("%d", &m);
-	printf("Ingresar aÃƒÆ’Ã‚Â±o de atencion que desea buscar: ");
+	printf("Ingresar Anio de atencion que desea buscar: ");
 	scanf("%d", &a);
 	
 	printf("\nIngresar Matricula del Veterinario que desea buscar: ");
