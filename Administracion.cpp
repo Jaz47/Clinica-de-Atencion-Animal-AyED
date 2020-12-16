@@ -73,7 +73,7 @@ void reg_veter(FILE *Arch_Veter){
 	
 	printf("Apellido y nombre del veterinario: ");
 	scanf("%s", &vet.ApellidoyNombre);
-		
+	_flushall();	
 	 printf("DNI del Veterinario: ");
 	 scanf("%d",&vet.DNI);
 	
@@ -96,7 +96,7 @@ void reg_veter(FILE *Arch_Veter){
 
 
 
-void Ranking(FILE *Arch_Veter){
+/*void Ranking(FILE *Arch_Veter){
 	 Arch_Veter=fopen("Veterinarios.dat","rb");
 	 Veterinario Lect;
 	 int Matricula[100];
@@ -108,7 +108,7 @@ void Ranking(FILE *Arch_Veter){
 	 	Matricula[c]=Lect.Matricula;
 	 	//Cantidades[c]=aten_vet(Arch_Veter,Lect.Matricula);
 	 }
-}
+}*/
 	
 void aten_vet(FILE *Arch_Veter){
 	char a;

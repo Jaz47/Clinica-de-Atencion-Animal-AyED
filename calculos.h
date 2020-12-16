@@ -22,7 +22,7 @@ struct fecha{
 };
 
 
-ypedef char cadena [60];
+typedef char cadena [60];
 
 struct Usuarios{
 	cadena usuario;
@@ -55,7 +55,7 @@ struct Turnos{
 	int Matricula_de_Veterinario;
     fecha Fecha ;
     int DNI_Duenio; 
-    cadena Detalle_de_Atencion[380];
+    cadena Detalle_de_Atencion;
     bool borrado;
 };
 
